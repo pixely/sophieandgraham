@@ -1,0 +1,24 @@
+{
+  "name": "sophieandgraham",
+  "version": "1.0.0",
+  "description": "Website for Sophie &amp; Graham website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx @11ty/eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixely/sophieandgraham.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pixely/sophieandgraham/issues"
+  },
+  "homepage": "https://github.com/pixely/sophieandgraham#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.1"
+  }
+}
