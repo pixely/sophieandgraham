@@ -30,6 +30,7 @@
     "sass": "^1.54.4"
   },
   "dependencies": {
+    "@11ty/eleventy-img": "^2.0.1",
     "normalize.css": "^8.0.1"
   }
 }
