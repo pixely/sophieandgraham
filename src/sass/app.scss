@@ -190,15 +190,21 @@ body {
 }
 
 .footer-image {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    display: block;
     width: 100%;
     pointer-events: none;
-    
+
     img {
         display: block;
         width: 100%;
+    }
+}
+
+@media (min-height: 400px) {
+    .footer-image {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
     }
 }
