@@ -18,7 +18,6 @@ module.exports = async function () {
     const resized = {};
 
     await images.forEach(async image => {
-        console.log('image', image);
         resized[image.name] = 
             await Image(image.url, {
                 ...defaults,

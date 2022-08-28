@@ -1,14 +1,17 @@
+const tinyHTML = require('@sardine/eleventy-plugin-tinyhtml');
+const Image = require("@11ty/eleventy-img");
+
+
 module.exports = function(eleventyConfig) {
   // Watch CSS files for changes
   eleventyConfig.setBrowserSyncConfig({
 		files: './_site/css/**/*.css'
 	});
-
   
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
-  const Image = require("@11ty/eleventy-img");
-
+  eleventyConfig.addPlugin(tinyHTML);
+  
   async function imageShortcode(src, alt, sizes = "100vw", widths = "300,600", className = '') {
     if(alt === undefined) {
       // You bet we throw an error on missing alt (alt="" works okay)
@@ -43,7 +46,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
   eleventyConfig.addLiquidShortcode("image", imageShortcode);
   eleventyConfig.addJavaScriptFunction("image", imageShortcode);
-
 
   return {
     dir: {
