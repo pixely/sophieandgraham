@@ -1,0 +1,45 @@
+@use "sass:map";
+
+@mixin tokens($theme) {
+  --theme-primary-light: #{map.get($theme, "primary", "light")};
+  --theme-primary-normal: #{map.get($theme, "primary", "normal")};
+  --theme-primary-dark: #{map.get($theme, "primary", "dark")};
+  --theme-secondary-normal: #{map.get($theme, "secondary", "normal")};
+  --theme-secondary-dark: #{map.get($theme, "secondary", "dark")};
+  --theme-tertiary: #{map.get($theme, "tertiary")};
+  --theme-text-heading: #{map.get($theme, "text", "heading")};
+  --theme-text-normal: #{map.get($theme, "text", "normal")};
+  --theme-text-dark: #{map.get($theme, "text", "dark")};
+  --theme-text-inverted: #{map.get($theme, "text", "inverted")};
+  --theme-text-primary: #{map.get($theme, "text", "primary")};
+  --theme-text-secondary: #{map.get($theme, "text", "secondary")};
+  --theme-base: #{map.get($theme, "base")};
+  --theme-error: #{map.get($theme, "error")};
+}
+
+// Default light mode
+:root {
+  @include tokens(map.get($tokens, "theme"))
+}
+
+// Dark mode
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    @include tokens(map.get($tokens, "dark-theme"))
+  }
+}
+
+// Iterate over all themes and output the tokens
+@each $name, $theme in map.get($tokens, "color", "theme") {
+  html[data-theme='#{$name}'] {
+    @include tokens($theme);
+  }    
+}
+
+// Animate all colour properties by default
+* {
+  transition-property: background-color, color, border-color;
+  transition-duration: .15s;
+  transition-timing-function: ease-in-out;
+}

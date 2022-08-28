@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 4vw 2fr 1fr 1fr 2fr 2fr 1fr 1fr 2fr 4vw;
+  max-width: 1200px;
+
+  &__hero {
+    grid-column: 2 / 11;
+  }
+
+  &__content {
+    grid-column: 2 / 11;
+  }
+
+}

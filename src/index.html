@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> 
+  <title>Sophie & Graham</title>
+  <link rel="canonical" href="https://www.sophieandgraham.co.uk/">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="https://use.typekit.net/ujn0mau.css">
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-GX8C8JXWM6"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GX8C8JXWM6');
+  </script>
+</head>
+
+<body>
+  <main class="teaser">
+    <div class="teaser__title">
+      <h1 class="hero-heading">
+        <span class="hero-heading__sophie">Sophie</span>
+        <span class="hero-heading__amp">&amp;</span>
+        <span class="hero-heading__graham">Graham</span>
+    </div>
+    <div class="teaser__date">
+      <time class="wedding-date" datetime="2023-05-06">
+        <span class="wedding-date__end">Saturday</span>
+        <span class="wedding-date__middle">6<sub>th</sub></span> 
+        <span class="wedding-date__end">May 2023</span>
+      </time>
+    </div>
+    <div class="teaser__address">
+      <h3 class="address">
+        <address>
+          <a href="https://www.google.com/maps/dir//Stratton+Court+Barn,+Stratton+Audley,+Bicester+OX27+9AJ/@51.9411631,-1.0980986,18z/data=!4m9!4m8!1m0!1m5!1m1!1s0x4876e12f94efe947:0x4d7361acc4a052dc!2m2!1d-1.0976035!2d51.9413757!3e0?hl=en">
+            Stratton Court Barn, <br>Stratton Audley, Bicester, OX27 9AJ
+          </a>
+        </address>
+      </h3>
+      <p>Formal invite to follow</p>
+    </div>
+    <div class="teaser__calendar">
+      <a href="/">Add to Calendar</a>
+    </div>
+    <div class="teaser__countdown">
+      <h4 class="countdown js-countdown">
+        <span class="countdown__days js-countdown-days">#</span>
+        days to go
+      </h4>
+    </div>
+    <div class="teaser__image">
+      <div class="image-hex">
+        <div class="image-hex__background"></div>
+        <div class="image-hex__foreground">
+          <div class="image-hex__image-container">
+            <img class="image-hex__image" src="/assets/sophie-graham.jpg" alt="Sophie and Graham sitting under a tree in Oxford" height="500" width="500" />
+          </div>
+        </div>
+      </div>    
+    </div>
+    <script>
+      const weddingDate = new Date("05/06/2023");
+      const differenceInDays = Math.ceil((weddingDate.getTime() - new Date()) / (1000 * 3600 * 24));
+      const countdown = document.querySelector('.js-countdown');
+      const countdownDays = document.querySelector('.js-countdown-days');
+      countdownDays.innerHTML = differenceInDays;
+      countdown.classList.add('is-visible');
+    </script>
+  </main>
+  <picture class="footer-image">
+    <source srcset="/assets/foliage-l.svg" media="(min-width: 1200px)" />
+    <source srcset="/assets/foliage-m.svg" media="(min-width: 900px)" />
+    <source srcset="/assets/foliage-s.svg" media="(min-width: 700px)" />
+    <img src="/assets/foliage-xs.svg" alt="" />
+  </picture>
+</body>
+</html>
