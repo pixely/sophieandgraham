@@ -1,0 +1,66 @@
+// Base typography config
+$font-family: josefin-sans, sans-serif;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+$font-heading: $font-family;
+$font-body: $font-family;
+
+// Heading styles
+$font-h1-family: $font-heading;
+$font-h1-size: 2.5rem;
+$font-h1-line-height: 1.5;
+$font-h1-weight: $font-weight-light;
+$font-h1-style: normal;
+$font-h1-transform: uppercase;
+
+$font-h2-family: $font-heading;
+$font-h2-size: 1rem;
+$font-h2-line-height: 1;
+$font-h2-weight: $font-weight-regular;
+$font-h2-style: normal;
+$font-h2-transform: uppercase;
+
+$font-h3-family: $font-heading;
+$font-h3-size: 0.6rem;
+$font-h3-line-height: 1.3;
+$font-h3-weight: $font-weight-regular;
+$font-h3-style: normal;
+$font-h3-transform: uppercase;
+
+$font-h4-family: $font-heading;
+$font-h4-size: 2.5rem;
+$font-h4-line-height: 1;
+$font-h4-weight: $font-weight-light;
+$font-h4-style: normal;
+$font-h4-transform: uppercase;
+
+$font-h5-family: $font-heading;
+$font-h5-size: 1rem;
+$font-h5-line-height: 1;
+$font-h5-weight: $font-weight-bold;
+$font-h5-style: normal;
+$font-h5-transform: uppercase;
+
+$font-h6-family: $font-heading;
+$font-h6-size: inherit;
+$font-h6-line-height: inherit;
+$font-h6-weight: $font-weight-light;
+$font-h6-style: normal;
+$font-h6-transform: uppercase;
+
+$font-body-family: $font-heading;
+$font-body-size: inherit;
+$font-body-line-height: inherit;
+$font-body-weight: $font-weight-light;
+$font-body-style: normal;
+$font-body-transform: uppercase;
+
+$font-body-s-family: $font-heading;
+$font-body-s-size: 0.7rem;
+$font-body-s-line-height: inherit;
+$font-body-s-weight: $font-weight-light;
+$font-body-s-style: normal;
+$font-body-s-transform: uppercase;

@@ -4,12 +4,9 @@
 // Generic layer
 @import "generic/generic";
 
-$color-text: #696969;
-$color-highlights: #daa520;
-$color-primary: #a7bd9f;
-$color-background: #fdfdfa;
 $highlights-width: 1px;
 $hex2: polygon(36.257% 0.183%, 85.519% 13.382%, 98.719% 62.645%, 62.656% 98.707%, 13.394% 85.507%, 0.194% 36.244%);
+
 body {
     background: $color-background;
     color: $color-text;
@@ -22,25 +19,52 @@ body {
 }
 
 .teaser {
-    margin: 50px auto;
+    margin: 48px auto;
     display: grid;
     grid-template-columns: 1fr minmax(280px, auto) 1fr;
     justify-items: center;
     justify-content: space-around;
-    gap: 20px;
+    gap: 16px;
     
     &__title {
         min-width: 50vw;
     }
 
+    &__intro,
     &__title,
     &__date,
+    &__married,
     &__address,
+    &__follow-up,
     &__calendar,
     &__countdown,
     &__image {
         text-align: center;
         grid-column: 2 / span 1;
+    }
+
+    &__intro {
+        padding-top: 0px;
+    }
+
+    &__title {
+        margin-top: 32px;
+    }
+
+    &__married {
+        margin-top: 32px;
+    }
+    
+    &__countdown {
+        margin: 144px auto 32px;
+    }
+
+    &__address {
+        margin-top: 16px;
+    }
+
+    &__image {
+        margin-bottom: 144px;
     }
 }
 
@@ -60,14 +84,20 @@ body {
     grid-template-rows: repeat(3, auto);
     align-items: center;
     justify-items: center;
-    max-width: 200px;
     margin: 0 auto;
+    gap: 10px;
+    max-width: 350px;
 
-    &__sophie,
-    &__graham { grid-column: 1 / -1; }
+    line-height: 1;
+
+    &__name { 
+        grid-column: 1 / -1;
+        padding: 0 24px;
+    }
+    
     &__amp { 
         grid-column: 2 / span 1;
-        padding: 0 10px;
+        padding: 0 8px;
     }
 
     &:before,
@@ -100,47 +130,76 @@ body {
     display: grid;
     grid-template-columns: repeat(3, auto);
     align-items: stretch;
+    line-height: 1;
 
     &__end {
         border-top: $highlights-width solid $color-highlights;
         border-bottom: $highlights-width solid $color-highlights;
-        padding: 10px 5px;
+        padding: 10px 8px 12px;
         display: grid;
         align-content: center;
     }
 
     &__middle {
         font-size: 2em;
-        padding: 0 10px;
+        padding: 0 20px;
         align-self: center;
+        display: grid;
+        align-content: center;
+        align-self: center;
+        grid-template-columns: auto auto;
+        font-weight: $font-weight-light;
+        position: relative;
+        top: -0.2rem;
+        gap: 2px;
     }
 
     sub {
-        font-size: 0.5em;
-        bottom: 0;
+        font-size: 0.6rem;
+        font-weight: $font-weight-regular;
+        display: grid;
+        align-self: center;
     }
 }
 
 .address {
     a {
         font-style: normal;
-        font-size: 14px;
-        font-weight: normal;    
         color: inherit;
         text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
 .calendar-cta {
+    gap: 5px;
+    color: $color-background;
+    background: $color-primary;
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 20px;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 0.6rem;
+    align-items: center;
+    text-decoration: none;
+    transition: background .1s linear;
+    border: $color-primary-dark;
+
+    &:hover {
+        background: $color-primary-dark;
+    }
 
     &:before {
-        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='16'%3E%3Cpath fill='%23333' fill-rule='evenodd' d='M12.5 16a1.5 1.5 0 0 0 1.5-1.5v-11A1.5 1.5 0 0 0 12.5 2H11V.375A.376.376 0 0 0 10.625 0h-.25A.376.376 0 0 0 10 .375V2H4V.375A.376.376 0 0 0 3.625 0h-.25A.376.376 0 0 0 3 .375V2H1.5A1.5 1.5 0 0 0 0 3.5v11A1.5 1.5 0 0 0 1.5 16h11ZM13 5H1V3.5c0-.275.225-.5.5-.5h11c.275 0 .5.225.5.5V5Zm-.5 10h-11a.501.501 0 0 1-.5-.5V6h12v8.5c0 .275-.225.5-.5.5Zm-7.875-5A.376.376 0 0 0 5 9.625v-1.25A.376.376 0 0 0 4.625 8h-1.25A.376.376 0 0 0 3 8.375v1.25c0 .206.169.375.375.375h1.25Zm3 0A.376.376 0 0 0 8 9.625v-1.25A.376.376 0 0 0 7.625 8h-1.25A.376.376 0 0 0 6 8.375v1.25c0 .206.169.375.375.375h1.25Zm3 0A.376.376 0 0 0 11 9.625v-1.25A.376.376 0 0 0 10.625 8h-1.25A.376.376 0 0 0 9 8.375v1.25c0 .206.169.375.375.375h1.25Zm-3 3A.376.376 0 0 0 8 12.625v-1.25A.376.376 0 0 0 7.625 11h-1.25a.376.376 0 0 0-.375.375v1.25c0 .206.169.375.375.375h1.25Zm-3 0A.376.376 0 0 0 5 12.625v-1.25A.376.376 0 0 0 4.625 11h-1.25a.376.376 0 0 0-.375.375v1.25c0 .206.169.375.375.375h1.25Zm6 0a.376.376 0 0 0 .375-.375v-1.25a.376.376 0 0 0-.375-.375h-1.25a.376.376 0 0 0-.375.375v1.25c0 .206.169.375.375.375h1.25Z'/%3E%3C/svg%3E");
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='16'%3E%3Cpath fill='%23fdfdfa' fill-rule='evenodd' d='M12.5 16a1.5 1.5 0 0 0 1.5-1.5v-11A1.5 1.5 0 0 0 12.5 2H11V.375A.376.376 0 0 0 10.625 0h-.25A.376.376 0 0 0 10 .375V2H4V.375A.376.376 0 0 0 3.625 0h-.25A.376.376 0 0 0 3 .375V2H1.5A1.5 1.5 0 0 0 0 3.5v11A1.5 1.5 0 0 0 1.5 16h11ZM13 5H1V3.5c0-.275.225-.5.5-.5h11c.275 0 .5.225.5.5V5Zm-.5 10h-11a.501.501 0 0 1-.5-.5V6h12v8.5c0 .275-.225.5-.5.5Zm-7.875-5A.376.376 0 0 0 5 9.625v-1.25A.376.376 0 0 0 4.625 8h-1.25A.376.376 0 0 0 3 8.375v1.25c0 .206.169.375.375.375h1.25Zm3 0A.376.376 0 0 0 8 9.625v-1.25A.376.376 0 0 0 7.625 8h-1.25A.376.376 0 0 0 6 8.375v1.25c0 .206.169.375.375.375h1.25Zm3 0A.376.376 0 0 0 11 9.625v-1.25A.376.376 0 0 0 10.625 8h-1.25A.376.376 0 0 0 9 8.375v1.25c0 .206.169.375.375.375h1.25Zm-3 3A.376.376 0 0 0 8 12.625v-1.25A.376.376 0 0 0 7.625 11h-1.25a.376.376 0 0 0-.375.375v1.25c0 .206.169.375.375.375h1.25Zm-3 0A.376.376 0 0 0 5 12.625v-1.25A.376.376 0 0 0 4.625 11h-1.25a.376.376 0 0 0-.375.375v1.25c0 .206.169.375.375.375h1.25Zm6 0a.376.376 0 0 0 .375-.375v-1.25a.376.376 0 0 0-.375-.375h-1.25a.376.376 0 0 0-.375.375v1.25c0 .206.169.375.375.375h1.25Z'/%3E%3C/svg%3E");
         
     }
 }
 
 .countdown {
-    font-weight: normal;
     visibility: hidden;
 
     &.is-visible {
@@ -149,12 +208,15 @@ body {
 
     &__days {
         display: block;
+        line-height: 0;
     }
 }
 
 .image-hex {
     display: grid;
-    width: 180px;
+    min-width: 180px;
+    width: 50vw;
+    max-width: 500px;
     aspect-ratio: 1;
 
     &__background {
@@ -193,7 +255,12 @@ body {
     &__image {
         width: 100%;
         height: auto;
-        // clip-path: $hex2;
+    }
+}
+
+@media (min-width: 700px) {
+    .image-hex {
+        width: 30vw;
     }
 }
 

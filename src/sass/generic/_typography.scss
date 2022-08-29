@@ -1,13 +1,12 @@
-$type--base: 20px;
-$type--extra-small: .694rem;
-
 html { font-size: 18px } /*20px*/
 
 body {
-  font-family: $font-family-body-copy;
-  font-weight: 400;
-  line-height: 1.65;
-  color: var(--theme-text-normal);
+  font-family: $font-body-family;
+  font-size: $font-body-size;
+  line-height: $font-body-line-height;
+  font-weight: $font-body-weight;
+  font-style: $font-body-style;
+  text-transform: $font-body-transform;
 }
 
 h1,
@@ -23,41 +22,67 @@ h6,
 .heading-5,
 .heading-6 {
   margin: 0;
-  font-family: $font-family-heading;
-  font-weight: bold;
-  line-height: 1.15;
-  color: var(--theme-text-heading);
 }
 
 h1,
 .heading-1 {
-  margin-top: 0;
-  font-size: 2.488rem;
+  font-family: $font-h1-family;
+  font-size: $font-h1-size;
+  line-height: $font-h1-line-height;
+  font-weight: $font-h1-weight;
+  font-style: $font-h1-style;
+  text-transform: $font-h1-transform;
 }
 
 h2,
 .heading-2 {
-  font-size: 2.074rem;
+  font-family: $font-h2-family;
+  font-size: $font-h2-size;
+  line-height: $font-h2-line-height;
+  font-weight: $font-h2-weight;
+  font-style: $font-h2-style;
+  text-transform: $font-h2-transform;
 }
 
 h3,
 .heading-3 {
-  font-size: 1.728rem;
+  font-family: $font-h3-family;
+  font-size: $font-h3-size;
+  line-height: $font-h3-line-height;
+  font-weight: $font-h3-weight;
+  font-style: $font-h3-style;
+  text-transform: $font-h3-transform;
 }
 
 h4,
 .heading-4 {
-  font-size: 1.44rem;
+  font-family: $font-h4-family;
+  font-size: $font-h4-size;
+  line-height: $font-h4-line-height;
+  font-weight: $font-h4-weight;
+  font-style: $font-h4-style;
+  text-transform: $font-h4-transform;
 }
 
 h5,
 .heading-5 {
-  font-size: 1.2rem;
+  color: $color-highlights;
+  font-family: $font-h5-family;
+  font-size: $font-h5-size;
+  line-height: $font-h5-line-height;
+  font-weight: $font-h5-weight;
+  font-style: $font-h5-style;
+  text-transform: $font-h5-transform;
 }
 
 h6,
 .heading-6 {
-  font-size: 1rem;
+  font-family: $font-h6-family;
+  font-size: $font-h6-size;
+  line-height: $font-h6-line-height;
+  font-weight: $font-h6-weight;
+  font-style: $font-h6-style;
+  text-transform: $font-h6-transform;
 }
 
 p {
@@ -66,19 +91,12 @@ p {
 
 small,
 .text-s {
-  font-size: .833rem;
-}
-
-.text-xs {
-  font-size: $type--extra-small;
-}
-
-.text-xxs {
-  font-size: .579rem;
-}
-
-.text--inverted {
-  color: var(--theme-text-inverted);
+  font-family: $font-body-s-family;
+  font-size: $font-body-s-size;
+  line-height: $font-body-s-line-height;
+  font-weight: $font-body-s-weight;
+  font-style: $font-body-s-style;
+  text-transform: $font-body-s-transform;
 }
 
 @media (min-width: 576px) {
