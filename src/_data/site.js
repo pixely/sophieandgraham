@@ -3,7 +3,7 @@ const Image = require('@11ty/eleventy-img');
 module.exports = async function () {
     
     const siteData = {
-        title: "Sophie &amp; Graham's Wedding",
+        title: "Sophie & Graham's Wedding",
         description: "Save the date for the wedding of Sophie Payne and Graham Martin",
     };
 
