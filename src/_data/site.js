@@ -45,8 +45,6 @@ module.exports = async function () {
         ],
     };
 
-    console.log(manifest);
-    
     return {
         ...siteData,
         manifest,
