@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> 
-  <title>Sophie &amp; Graham's Wedding</title>
-  <meta name="title" content="Sophie &amp; Graham's Wedding">
-  <meta name="description" content="Save the date for the wedding of Sophie Payne and Graham Martin">
+  <title>{{ site.title }}</title>
+  <meta name="title" content="{{ site.title }}">
+  <meta name="description" content="{{ site.description }}">
+
+  <link rel="shortcut icon" type="image/svg+xml" href="{{ site.icons.svg }}">
+  <link rel="alternate icon" href="{{ site.icons.ico }}">
+  <link rel="apple-touch-icon" href="{{ site.icons.apple }}">
+  <link rel="mask-icon" href="{{ site.icons.maskIcon }}" color="{{ site.manifest.colours.theme }}">
+
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="application-name" content="{{ site.title }}">
+  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
+  <meta name="theme-color" content="{{ site.manifest.colours.theme }}">
+  
   <link rel="canonical" href="https://www.sophieandgraham.co.uk/">
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="https://use.typekit.net/ujn0mau.css">

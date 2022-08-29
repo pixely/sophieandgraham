@@ -1,0 +1,15 @@
+---
+permalink: manifest.json
+eleventyExcludeFromCollections: true
+---
+{
+  "name": "{{ site.title }}",
+  "short_name": "{{ site.title }}",
+  "description": "{{ site.description }}",
+  "orientation": "portrait",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "icons": {{ site.manifest.icons | json }},
+  "theme_color": "{{ site.manifest.colours.theme }}",
+  "background_color": "{{ site.manifest.colours.background }}"
+}
