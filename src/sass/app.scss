@@ -10,8 +10,9 @@ $hex2: polygon(36.257% 0.183%, 85.519% 13.382%, 98.719% 62.645%, 62.656% 98.707%
 body {
     background: $color-background;
     color: $color-text;
-    
+    -webkit-font-smoothing: antialiased;
 }
+
 .container {
     display: grid;
     margin: 0 20px;

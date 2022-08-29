@@ -3,10 +3,16 @@ const Image = require("@11ty/eleventy-img");
 const { readFileSync } = require('fs');
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.setUseGitIgnore(false);
+  
+  eleventyConfig.addWatchTarget("./_site/css/");
+  eleventyConfig.addWatchTarget("./src/assets/");
+  
+
   // Watch CSS files for changes
   eleventyConfig.setBrowserSyncConfig({
-		files: './_site/css/**/*.css'
-	});
+		files: './_site/css/**/*.css',
+  });
   
   // Display 404 page in BrowserSnyc
   eleventyConfig.setBrowserSyncConfig({
