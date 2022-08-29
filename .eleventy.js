@@ -1,6 +1,6 @@
 const tinyHTML = require('@sardine/eleventy-plugin-tinyhtml');
 const Image = require("@11ty/eleventy-img");
-
+const { readFileSync } = require('fs');
 
 module.exports = function(eleventyConfig) {
   // Watch CSS files for changes
@@ -8,6 +8,21 @@ module.exports = function(eleventyConfig) {
 		files: './_site/css/**/*.css'
 	});
   
+  // Display 404 page in BrowserSnyc
+  eleventyConfig.setBrowserSyncConfig({
+    callbacks: {
+        ready: (err, bs) => {
+            const content404 = readFileSync('_site/404.html');
+
+            bs.addMiddleware('*', (req, res) => {
+                // Provides the 404 content without redirect.
+                res.write(content404);
+                res.end();
+            });
+        },
+    },
+});
+
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/assets/favicons": "/" });
 
