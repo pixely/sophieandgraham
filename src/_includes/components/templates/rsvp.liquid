@@ -1,104 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> 
-  <title>{{ site.title }}</title>
-  <meta name="title" content="{{ site.title }}">
-  <meta name="description" content="{{ site.description }}">
+{% layout 'components/templates/default' %}
 
-  <link rel="shortcut icon" type="image/svg+xml" href="{{ site.icons.svg }}">
-  <link rel="alternate icon" href="{{ site.icons.ico }}">
-  <link rel="apple-touch-icon" href="{{ site.icons.apple }}">
-  <link rel="mask-icon" href="{{ site.icons.maskIcon }}" color="{{ site.manifest.colours.theme }}">
-
-  <link rel="manifest" href="/manifest.json">
-  
-  <meta name="application-name" content="{{ site.title }}">
-  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
-  <meta name="theme-color" content="{{ site.manifest.colours.theme }}">
-  
-  <link rel="canonical" href="https://www.sophieandgraham.co.uk/">
-  <link rel="stylesheet" href="/css/app.css">
-  <link rel="stylesheet" href="https://use.typekit.net/ujn0mau.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GX8C8JXWM6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-GX8C8JXWM6');
-  </script>
-</head>
-
-<body>
+{% block content %}
+  <code>{{ invite|json }}</code>
   <main class="teaser">
     <div class="teaser__intro">
-      <p class="heading-5">Save the date</p>
+      <p class="heading-5">{{ invite.Name }}</p>
     </div>
-    <div class="teaser__title">
-      <h1 class="hero-heading">
-        <span class="hero-heading__name">{{ invite.Name }}</span>
-        <span class="hero-heading__amp">&amp;</span>
-        <span class="hero-heading__name">Graham</span>
-    </div>
-    <div class="teaser__married">
-      <h2 class="address heading-3">
-        Are getting married
-      </h2>
-    </div>
-    <h3 class="teaser__date heading-2">
-      <time class="wedding-date" datetime="2023-05-06">
-        <span class="wedding-date__end">Saturday</span>
-        <span class="wedding-date__middle">6<sub>th</sub></span> 
-        <span class="wedding-date__end">May 2023</span>
-      </time>
-    </h3>
-    <div class="teaser__follow-up">
-      <h3 class="heading-3">Formal invitation to follow</h3>
-    </div>
-    <div class="teaser__address">
-      <h2 class="address heading-3">
-        <address>
-          <a href="https://www.google.com/maps/dir//Stratton+Court+Barn,+Stratton+Audley,+Bicester+OX27+9AJ/@51.9411631,-1.0980986,18z/data=!4m9!4m8!1m0!1m5!1m1!1s0x4876e12f94efe947:0x4d7361acc4a052dc!2m2!1d-1.0976035!2d51.9413757!3e0?hl=en" target="_blank">
-            Stratton Court Barn, <br>Stratton Audley, Bicester, OX27 9AJ
-          </a>
-        </address>
-      </h2>
-    </div>
-    <div class="teaser__calendar">
-      <a href="/calendar.ics" class="calendar-cta">Add to Calendar</a>
-    </div>
-    <div class="teaser__countdown">
-      <p class="countdown js-countdown heading-4">
-        <span class="countdown__days js-countdown-days">#</span>
-        <span class="text-s">days to go</span>
-      </p>
-    </div>
-    <div class="teaser__image">
-      <div class="image-hex">
-        <div class="image-hex__background"></div>
-        <div class="image-hex__foreground">
-          <div class="image-hex__image-container">
-            {% image "./src/assets/sophie-graham.jpg", "Sophie and Graham sitting under a tree in Oxford", "(min-width: 2000px) 500px, (min-width: 720px) 25vw, 180px", "180,360,540,720,1000,1500", "image-hex__image" %}
-          </div>
-        </div>
-      </div>    
-    </div>
-    <script>
-      const weddingDate = new Date("05/06/2023");
-      const differenceInDays = Math.ceil((weddingDate.getTime() - new Date()) / (1000 * 3600 * 24));
-      const countdown = document.querySelector('.js-countdown');
-      const countdownDays = document.querySelector('.js-countdown-days');
-      countdownDays.innerHTML = differenceInDays;
-      countdown.classList.add('is-visible');
-    </script>
   </main>
-  <picture class="footer-image">
-    <source srcset="/assets/foliage-l.svg" media="(min-width: 1200px)" />
-    <source srcset="/assets/foliage-m.svg" media="(min-width: 900px)" />
-    <source srcset="/assets/foliage-s.svg" media="(min-width: 700px)" />
-    <img src="/assets/foliage-xs.svg" alt="" loading="lazy" decoding="async" />
-  </picture>
-  <div class="footer-fade"></div>
-</body>
-</html>
+{% endblock %}
