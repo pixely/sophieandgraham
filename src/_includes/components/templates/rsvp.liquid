@@ -1,10 +1,20 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  <code>{{ invite|json }}</code>
+  {% comment %} <code>{{ invite.people|json }}</code> {% endcomment %}
   <main class="teaser">
     <div class="teaser__intro">
       <p class="heading-5">{{ invite.Name }}</p>
+    </div>
+    <div class="teaser__address">
+    {% for person in invite.people %}
+      <div>
+        <p>{{ person['Full Name'] }}</p>
+        <p>{{ person['Menu Choice']}}</p>
+        <p>{{ person['Dietary Requirements ']}}</p>  
+        <hr>
+      </div>
+    {% endfor %}
     </div>
   </main>
 {% endblock %}
