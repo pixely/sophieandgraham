@@ -1,0 +1,31 @@
+
+.textarea {
+    &__label {
+        display: block;
+        text-align: center;
+        margin-bottom: $spacing-xs;
+    }
+
+    &__input {
+        background: transparent;
+        border: 2px solid $color-grey-medium;
+        outline: 1px solid transparent;
+        border-radius: 30px;
+        padding: 12px;
+        transition: all 0.2s linear;
+        box-shadow: 0px 0px 0px 1px transparent;
+        width: 100%;
+        min-height: 200px;
+        resize: none;
+        color: $color-text;
+        font-size: 0.8rem;
+
+        &:hover { 
+            border-color: $color-grey-dark;
+        }
+
+        &:focus {
+            box-shadow: 0px 0px 0px 2px $color-highlights;
+        }
+    }
+}

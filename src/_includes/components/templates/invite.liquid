@@ -1,0 +1,42 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+  <main class="teaser">
+    <div class="teaser__intro">
+      <p class="heading-5">Invite</p>
+    </div>
+    <div class="teaser__title">
+      {% include "components/molecules/sophie-and-graham" %}
+    </div>
+    <div class="teaser__married">
+      <h2 class="heading-3">
+        Are getting married
+      </h2>
+    </div>
+    <h3 class="teaser__date heading-2">
+      {% include "components/molecules/wedding-date" %}
+    </h3>
+    <div class="teaser__follow-up">
+      <h3 class="heading-3">Formal invitation to follow</h3>
+      <a href="rsvp">RSVP HERE</a>
+    </div>
+    <div class="teaser__address">
+      <h2 class="address heading-3">
+        <address>
+          <a href="{{ location.googleMapsDirections }}" target="_blank">
+            {{ location.venueName}}<br/> {{ location.venueAddress }}
+          </a>
+        </address>
+      </h2>
+    </div>
+    <div class="teaser__calendar">
+      {% include "components/atoms/calendar-cta" %}
+    </div>
+    <div class="teaser__countdown">
+      {% include "components/molecules/countdown" %}
+    </div>
+    <div class="teaser__image">
+      {% include "components/atoms/image-hex" %}
+    </div>
+  </main>
+{% endblock %}

@@ -5,7 +5,7 @@ const AirTable = require("airtable");
 module.exports = async function () {
     const airtableData = new AirTable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE);
     const inviteList = await airtableData("Invite List").select({
-      view: "Grid view"
+      view: "Grid view",
     }).all();
     const invites = [];
 
@@ -16,7 +16,7 @@ module.exports = async function () {
         
         newGuestArray = await guestArray.map(async guest => { 
           const a = await airtableData("Guest List").find(guest);
-          console.log('a', a);
+          // console.log('a', a);
           return {
             "id": a._rawJson.id,
             ...a._rawJson.fields,
@@ -62,7 +62,7 @@ module.exports = async function () {
       }
     ));
 
-    console.log('final', finalList);
+    // console.log('final', finalList);
     return finalList;
 };
 

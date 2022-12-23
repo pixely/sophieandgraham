@@ -1,4 +1,9 @@
 ---
-layout: 'components/pages/home.liquid'
-permalink: '/invite/'
+pagination:
+    data: invites
+    size: 1
+    alias: invite
+eleventyExcludeFromCollections: true
+layout: 'components/templates/invite.liquid'
+permalink: '/{{ invite["Invite Code"] }}/'
 ---

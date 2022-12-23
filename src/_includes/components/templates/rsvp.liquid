@@ -1,57 +1,93 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  {% comment %} <code>{{ invite.people|json }}</code> {% endcomment %}
-  <main class="teaser">
-    <div class="teaser__intro">
-      <p class="heading-5">{{ invite.Name }}</p>
+  <form class="form">
+    <div class="form__title">
+      <h1 class="heading-2">RVSP</h1>
     </div>
-    <div class="teaser__address">
+    <div class="form__subtitle">
+      <h2 class="heading-4">We really hope you're able to celebrate with us!</h2>
+    </div>
+      <div class="form__section">
+        {% for person in invite.people %}
+          {% capture field_name %}{{person.id}}-attend{% endcapture %}
+          {% capture field_yes %}{{person.id}}-yes{% endcapture %}
+          {% capture field_no %}{{person.id}}-no{% endcapture %}
 
-    <form>
+          <fieldset class="form__fieldset">
+            <div class="form__fieldset-title">
+              <h3 class="heading-3">{{ person['Name'] }}'s RSVP</h3>
+            </div>
+            <div class="form__field">
+              {% render "components/atoms/checkbox", name: field_name, id: field_yes, label: "Gladly accept" %}
+            </div>
+            <div class="form__field">
+              {% render "components/atoms/checkbox", name: field_name, id: field_no, label: "Regretfully Decline" %}
+            </div>
+          </fieldset>
+        {% endfor %}
+      </div>
 
-        <label for="attend">Yes</label>
-        <input type="radio" name="attend" value="yes" id="attend" />
-        <label for="decline">No</label>
-        <input type="radio" name="attend" value="decline" id="decline" />
-        <label for="partial">Some</label>
-        <input type="radio" name="attend" value="partial" id="partial" />
+      {% render "components/atoms/button", text: "Continue" %}
+
+      {% render "components/atoms/section-break" %}
+
+      <div class="form__subtitle">
+        <h2 class="heading-2">
+          {% if invite['Invite Type'] == 'Day' %}
+            Your meal choice
+          {% else %}
+            Your dietary requirements
+          {% endif %}
+        </h2>
+      </div>
+
+      <div class="form__section">
 
         {% for person in invite.people %}
-          <label for="person-{{ person.id }}">{{ person['Full Name'] }}</label>
-          <input type="checkbox" name="attendees" value="{{ person.id }}" id="person-{{ person.id }}" />
-        {% endfor %}
 
-        <hr>
+          <fieldset class="form__fieldset">
+
+            {% if invite['Invite Type'] == 'Day' %}
+              {% capture field_name %}{{person.id}}-meal{% endcapture %}
+              {% capture field_yes %}{{person.id}}-yes{% endcapture %}
+              {% capture field_no %}{{person.id}}-no{% endcapture %}
+
+              <div class="form__fieldset-title">
+                <h3 class="heading-3">{{ person['Name'] }}'s Meal</h3>
+              </div>
+
+              {% for meal in menu %}
+                {% capture field_name %}{{person.id}}-meal{% endcapture %}
+                {% capture field_id %}{{person.id}}-{{meal['Name']}}{% endcapture %}
+                
+                <div class="form__field">
+                  {% render "components/atoms/checkbox", name: field_name, id: field_id, label: meal['Description'] %}
+                </div>
+              {% endfor %}
+            {% endif %}
+
+          </fieldset>
+
+          <fieldset class="form__fieldset">
+
+            {% if invite['Invite Type'] == 'Evening' %}
+              <div class="form__fieldset-title">
+                <h3 class="heading-3">{{ person['Name'] }}'s Dietery Requirements</h3>
+              </div>
+            {% endif %}
+
+            {% capture field_name %}{{person.id}}-dietary{% endcapture %}
+            {% render "components/atoms/textarea", name: field_name, label: "Please let us know if you have any dietary requirements or allergies" %}
+          
+          </fieldset>
         
-        <label for="email">Enter your email address</label>
-        <input type="email" id="email" name="email" />
+        {% endfor %}
+      
+      </div>
 
-        <hr>
+      {% render "components/atoms/button", text: "Confirm choices" %}
 
-    {% for person in invite.people %}
-        <div>
-          <h3>{{ person['Name'] }}'s food choices</h3>
-          
-          <p>Main course</p>
-          <label for="nandos">Nando's</label>
-          <input type="radio" name="main-course" value="nandos" id="nandos" />
-          <label for="pizza">Pizza</label>
-          <input type="radio" name="main-course" value="pizza" id="pizza" />
-          
-          <p>{{ person['Dietary Requirements ']}}</p>
-          
-          <label for="dietary_requirements">Please state any dietary requirements? e.g. vegan or gluten-free</label>
-          <br>
-          <textarea id="dietary_requirements" name="dietary_requirements"></textarea>
-          <hr>
-        </div>
-    {% endfor %}
+  </form>
 
-        <input type="submit" value="Send RSVP" />
-
-    </form>
-
-    </div>
-  </main>
 {% endblock %}

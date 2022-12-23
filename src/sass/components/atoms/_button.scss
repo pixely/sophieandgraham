@@ -1,0 +1,29 @@
+.button {
+    appearance: none;
+    -webkit-appearance: none;
+    color: $color-background;
+    background: $color-primary;
+    padding: 20px;
+    border-radius: 30px;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 0.9rem;
+    align-items: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background .3s linear;
+    border: $color-primary-dark;
+    display: block;
+    width: 100%;
+    outline: none;
+    
+    &:hover {
+        background: $color-primary-dark;
+        cursor: pointer;
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 0px 2px $color-highlights;
+    }
+
+}
