@@ -1,8 +1,8 @@
 // Settings layer
-@import "settings/settings";
+@import "settings";
 
 // Generic layer
-@import "generic/generic";
+@import "generic";
 
 $highlights-width: 1px;
 $hex2: polygon(36.257% 0.183%, 85.519% 13.382%, 98.719% 62.645%, 62.656% 98.707%, 13.394% 85.507%, 0.194% 36.244%);
@@ -343,3 +343,6 @@ body {
     z-index: 100;
     background: linear-gradient(180deg, rgba(253,253,250,0) 0%, rgba(253,253,250,0.9) 60%, rgba(253,253,250,0.9) 100%);
 }
+
+// Component layer
+@import "components";
