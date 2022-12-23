@@ -7,14 +7,51 @@
       <p class="heading-5">{{ invite.Name }}</p>
     </div>
     <div class="teaser__address">
-    {% for person in invite.people %}
-      <div>
-        <p>{{ person['Full Name'] }}</p>
-        <p>{{ person['Menu Choice']}}</p>
-        <p>{{ person['Dietary Requirements ']}}</p>  
+
+    <form>
+
+        <label for="attend">Yes</label>
+        <input type="radio" name="attend" value="yes" id="attend" />
+        <label for="decline">No</label>
+        <input type="radio" name="attend" value="decline" id="decline" />
+        <label for="partial">Some</label>
+        <input type="radio" name="attend" value="partial" id="partial" />
+
+        {% for person in invite.people %}
+          <label for="person-{{ person.id }}">{{ person['Full Name'] }}</label>
+          <input type="checkbox" name="attendees" value="{{ person.id }}" id="person-{{ person.id }}" />
+        {% endfor %}
+
         <hr>
-      </div>
+        
+        <label for="email">Enter your email address</label>
+        <input type="email" id="email" name="email" />
+
+        <hr>
+
+    {% for person in invite.people %}
+        <div>
+          <h3>{{ person['Name'] }}'s food choices</h3>
+          
+          <p>Main course</p>
+          <label for="nandos">Nando's</label>
+          <input type="radio" name="main-course" value="nandos" id="nandos" />
+          <label for="pizza">Pizza</label>
+          <input type="radio" name="main-course" value="pizza" id="pizza" />
+          
+          <p>{{ person['Dietary Requirements ']}}</p>
+          
+          <label for="dietary_requirements">Please state any dietary requirements? e.g. vegan or gluten-free</label>
+          <br>
+          <textarea id="dietary_requirements" name="dietary_requirements"></textarea>
+          <hr>
+        </div>
     {% endfor %}
+
+        <input type="submit" value="Send RSVP" />
+
+    </form>
+
     </div>
   </main>
 {% endblock %}

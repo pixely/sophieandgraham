@@ -17,7 +17,10 @@ module.exports = async function () {
         newGuestArray = await guestArray.map(async guest => { 
           const a = await airtableData("Guest List").find(guest);
           console.log('a', a);
-          return a._rawJson.fields;
+          return {
+            "id": a._rawJson.id,
+            ...a._rawJson.fields,
+          }
         });
 
         // console.log('point a');
