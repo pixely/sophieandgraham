@@ -1,0 +1,51 @@
+.image-hex {
+    display: grid;
+    min-width: 180px;
+    width: 50vw;
+    max-width: 500px;
+    aspect-ratio: 1;
+
+    &__background {
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        background-color: $color-highlights;
+        -webkit-mask-image: url("/assets/hex-1.svg");
+        mask-image: url("/assets/hex-1.svg");
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        -webkit-mask-position: center;
+    }
+
+    &__foreground {
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        background: $color-highlights;
+        clip-path: $hex2;
+    }
+
+    &__image-container {
+        position: absolute;
+        background: white;
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+        top: 2px;
+        right: 2px;
+        clip-path: $hex2;
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (min-width: 700px) {
+    .image-hex {
+        width: 30vw;
+    }
+}

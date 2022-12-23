@@ -1,0 +1,12 @@
+.overview{
+
+    &__section-image {
+        margin: $spacing-l auto;
+        max-width: 50%;
+    }
+
+    &__section-title {
+        text-align: center;
+        margin-bottom: $spacing-m;
+    }
+}
