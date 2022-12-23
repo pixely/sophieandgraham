@@ -1,0 +1,19 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+  <form class="form">
+    <div class="form__title">
+      <h1 class="heading-2">Thank you</h1>
+    </div>
+    <div class="form__subtitle">
+      <h2 class="heading-4">We're so excited you'll be celebrating our special day with us!</h2>
+    </div>
+    <div class="form__section">
+        {% capture field_name %}{{invite.id}}-message{% endcapture %}
+        {% render "components/atoms/textarea", name: field_name, label: "Leave a message" %}       
+    </div>
+
+    {% render "components/atoms/button", text: "Finish" %}
+  </form>
+
+{% endblock %}

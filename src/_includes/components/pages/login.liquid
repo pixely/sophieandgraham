@@ -1,0 +1,21 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+  <form class="form">
+    <div class="form__title">
+      <h1 class="heading-2">Login</h1>
+    </div>
+    <div class="form__subtitle">
+      <h2 class="heading-4">Please enter the code on your invitation to get started</h2>
+    </div>
+      <div class="form__section">
+          <fieldset class="form__fieldset">
+            {% render "components/atoms/text-input", name: "invite_code", placeholder: "e.g. AB1" %}
+          </fieldset>
+      </div>
+
+      {% render "components/atoms/button", text: "Get started" %}
+
+  </form>
+
+{% endblock %}
