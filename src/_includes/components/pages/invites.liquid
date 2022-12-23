@@ -1,0 +1,30 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Invite Code</th> 
+                <th>Type</th>
+                <th>Guests</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invite in invites %}
+            <tr>
+                <td>{{ invite['Name'] }}</td>
+                <td><a href="/{{ invite['Invite Code'] }}">{{ invite['Invite Code'] }}</a></td>
+                <td>{{ invite['Invite Type'] }}</td>
+                <td>
+                    {% for person in invite.people %}
+                        {% if forloop.last and forloop.length > 1 %} and {% endif %}
+                        {{- person['Full Name'] -}}
+                        {% if forloop.last == false and forloop.rindex > 2 %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+  </table>
+{% endblock %}
