@@ -1,5 +1,11 @@
 {% layout 'components/templates/default' %}
 
+{% assign sizes = "(min-width: 2000px) 500px, (min-width: 720px) 25vw, 180px" %}
+{% assign widths = "180,360,540,720,1000,1500" %}
+
+{% assign sizes = "210px" %}
+{% assign widths = "210,420,630,840" %}
+
 {% block content %}
 
 <div class="overview">
@@ -26,7 +32,12 @@
   <!-- ORDER OF THE DAY -->
   <div class="overview__section">
     <div class="overview__section-image">
-        {% render "components/atoms/image-hex", url: "./src/assets/images/stratton-court-barn-1.jpg", alt: "Courtyard at Stratton Court Barn our wedding venue" %}
+        {% render "components/atoms/image-hex", 
+          url: "./src/assets/images/stratton-court-barn-1.jpg", 
+          alt: "Courtyard at Stratton Court Barn our wedding venue"
+          sizes: sizes,
+          widths: widths,
+        %}
     
     </div>
     <div class="overview__section-title">
@@ -42,7 +53,12 @@
   <!-- OUR STORY -->
   <div class="overview__section">
     <div class="overview__section-image">
-      {% render "components/atoms/image-hex", url: "./src/assets/sophie-graham.jpg", alt: "Graham & Sophie walking in Oxford" %}
+      {% render "components/atoms/image-hex", 
+        url: "./src/assets/images/sophie-graham.jpg",
+        alt: "Graham & Sophie walking in Oxford",
+        sizes: sizes,
+        widths: widths 
+      %}
     </div>
     <div class="overview__section-title">
       <h2 class="heading-2">Our Story</h2>
