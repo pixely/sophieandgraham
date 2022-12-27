@@ -102,6 +102,15 @@ small,
   text-transform: $font-body-s-transform;
 }
 
+a {
+  color: $color-primary-dark;
+  transform: color .2s linear;
+
+  &:hover {
+    color: darken($color-primary-dark, 20%);
+  }
+}
+
 @media (min-width: 576px) {
   
   // html { font-size: 26px }

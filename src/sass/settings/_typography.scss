@@ -56,11 +56,11 @@ $font-body-size: inherit;
 $font-body-line-height: inherit;
 $font-body-weight: $font-weight-light;
 $font-body-style: normal;
-$font-body-transform: uppercase;
+$font-body-transform: none;
 
 $font-body-s-family: $font-heading;
-$font-body-s-size: 0.7rem;
-$font-body-s-line-height: inherit;
-$font-body-s-weight: $font-weight-light;
+$font-body-s-size: 0.8rem;
+$font-body-s-line-height: 1.25;
+$font-body-s-weight: $font-weight-regular;
 $font-body-s-style: normal;
 $font-body-s-transform: uppercase;
