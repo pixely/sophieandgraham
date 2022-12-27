@@ -1,3 +1,34 @@
-<h1>HEADER SECTION</h1>
+{% capture rsvp_url %}/{{ invite['Invite Code'] }}/rsvp/{% endcapture %}
 
-<a href="rsvp">Go to RSVP form</a>
+<div class="invite-header">
+
+    <div class="invite-header__title">
+        {% render "components/molecules/hero-heading" %}
+    </div>
+
+    <div class="invite-header__date">
+        <h2 class="invite-header__date-prefix heading-4">are getting married</h2>
+        {% include "components/molecules/wedding-date" %}
+    </div>
+
+    <div class="invite-header__rsvp">
+        <h3 class="heading-2">Hi 
+            {% for person in invite.people %}
+                {% if forloop.last and forloop.length > 1 %} &amp; {% endif %}
+                    {{- person['Name'] -}}
+                {% if forloop.last == false and forloop.rindex > 2 %}, {% endif %}
+                {%- if forloop.last and forloop.length > 1 -%}!{%- endif -%}
+            {%- endfor -%}
+        </h3>
+
+        <div class="invite-header__cta">
+            {% render "components/atoms/call-to-action-primary"
+                url: rsvp_url
+                text: "RSVP"
+            %}
+        </div>
+
+        <h2 class="heading-4">Please RSVP by the 16th February</h2>
+    </div>
+
+</div>

@@ -1,5 +1,5 @@
 <a 
-    class="call-to-action" 
+    class="call-to-action{% if primary == true %} call-to-action--primary{% endif %}" 
     href="{{ url }}">
     {{ text}}
 </a>

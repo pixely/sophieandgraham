@@ -1,0 +1,25 @@
+.invite-header {
+
+    &__title {
+        margin: $spacing-l auto;
+    }
+
+    &__date {
+        margin: 0 auto $spacing-l auto;
+        max-width: 290px;
+        text-align: center;
+    }
+
+    &__date-prefix {
+        margin-bottom: $spacing-s;
+    }
+
+    &__rsvp {
+        margin: $spacing-l auto;   
+        text-align: center;
+    }
+
+    &__cta {
+        margin: $spacing-s auto;
+    }
+}

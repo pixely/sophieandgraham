@@ -11,11 +11,12 @@
     align-items: center;
     text-decoration: none;
     text-transform: uppercase;
-    transition: background .3s linear, color .3s linear;
+    transition: background .3s linear, color .3s linear, border .3s linear;
     border: 2px solid $color-primary;
     display: block;
     width: 100%;
     outline: none;
+    text-align: center;
     
     &:hover {
         color: white;
@@ -30,10 +31,11 @@
     &--primary {
         color: $color-background;
         background: $color-primary;
-        border-color: $color-primary-dark;
+        border-color: $color-primary;
     
         &:hover {
             background: $color-primary-dark;
+            border-color: $color-primary-dark;
         }
     }
 
