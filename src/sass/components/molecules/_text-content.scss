@@ -1,12 +1,16 @@
 .text-content {
     padding: 0 $spacing-s;
     line-height: 1.25;
-         
+
     *:not(:last-child) {
         margin-bottom: $spacing-s;
     }
 
     &--centered {
         text-align: center;
+    }
+
+    &__cta {
+        margin-top: $spacing-m;
     }
 }
