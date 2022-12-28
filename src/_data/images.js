@@ -5,6 +5,7 @@ module.exports = async function () {
     const defaults = {
         formats: ["avif", "webp", "jpeg"],
         outputDir: "./_site/images/",
+        urlPath: "/images/",
     };
 
     // const images = [{

@@ -2,12 +2,11 @@
   "name": "sophieandgraham",
   "version": "1.0.0",
   "description": "Website for Sophie &amp; Graham website",
-  "main": "index.js",
   "browserslist": "last 1 version, >1%",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:sass": "sass --load-path=node_modules --watch src/sass:_site/css",
-    "build:sass": "sass --load-path=node_modules src/sass:_site/css",
+    "watch:sass": "parcel watch src/js/app.js --dist-dir=_site",
+    "build:sass": "parcel build src/js/app.js --dist-dir=_site",
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
     "start": "npm-run-all build:sass --parallel watch:*",
@@ -26,9 +25,15 @@
   "homepage": "https://github.com/pixely/sophieandgraham#readme",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.2",
+    "@parcel/optimizer-data-url": "^2.8.2",
+    "@parcel/packager-raw-url": "^2.8.2",
+    "@parcel/transformer-inline-string": "^2.8.2",
+    "@parcel/transformer-sass": "^2.8.2",
+    "@parcel/transformer-webmanifest": "^2.8.2",
     "airtable": "^0.11.4",
     "dotenv": "^16.0.2",
     "npm-run-all": "^4.1.5",
+    "parcel": "^2.8.2",
     "sass": "^1.57.1"
   },
   "dependencies": {

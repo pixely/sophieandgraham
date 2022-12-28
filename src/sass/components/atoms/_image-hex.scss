@@ -12,8 +12,8 @@ $hex2: polygon(36.257% 0.183%, 85.519% 13.382%, 98.719% 62.645%, 62.656% 98.707%
         grid-row: 1;
         position: relative;
         background-color: $color-highlights;
-        -webkit-mask-image: url("/assets/svgs/hex-1.svg");
-        mask-image: url("/assets/svgs/hex-1.svg");
+        -webkit-mask-image: url("../assets/svgs/hex-1.svg");
+        mask-image: url("../assets/svgs/hex-1.svg");
         mask-repeat: no-repeat;
         mask-size: contain;
         mask-position: center;
