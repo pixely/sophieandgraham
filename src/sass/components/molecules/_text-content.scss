@@ -6,6 +6,18 @@
         margin-bottom: $spacing-s;
     }
 
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul li {
+        width: fit-content;
+        display: list-item;
+        margin: 0 auto;
+        list-style: none;
+    }
+
     &--centered {
         text-align: center;
     }
