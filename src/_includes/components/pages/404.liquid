@@ -1,14 +1,15 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  <main class="teaser">
-    <div class="teaser__title">
-      {% include "components/molecules/hero-heading" %}
+
+    <div class="page">
+        <div class="page__header">
+            {% include "components/molecules/hero-heading" %}
+        </div>
+
+        <div class="text-content text-content--centered">
+            <h3 class="heading-2">Sorry, Page not found</h3>
+        </div>
     </div>
-    <div class="teaser__married">
-      <h2 class="heading-3">
-        Sorry, Page not found
-      </h2>
-    </div>
-  </main>
+
 {% endblock %}

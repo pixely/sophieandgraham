@@ -22,4 +22,9 @@
     &__cta {
         margin: $spacing-s auto;
     }
+
+    &__teaser {
+        margin: $spacing-xl auto;
+        max-width: 210px;
+    }
 }
