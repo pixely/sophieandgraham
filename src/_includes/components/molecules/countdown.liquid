@@ -1,10 +1,9 @@
-<p class="countdown js-countdown heading-4">
+<p class="countdown js-countdown">
     <span class="countdown__days js-countdown-days">#</span>
     <span class="text-s">days to go</span>
 </p>
 <script>
-    const weddingDate = new Date("05/06/2023");
-    const differenceInDays = Math.ceil((weddingDate.getTime() - new Date()) / (1000 * 3600 * 24));
+    const differenceInDays = Math.ceil((new Date("05/06/2023").getTime() - new Date()) / (1000 * 3600 * 24));
     const countdown = document.querySelector('.js-countdown');
     const countdownDays = document.querySelector('.js-countdown-days');
     countdownDays.innerHTML = differenceInDays;

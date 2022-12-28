@@ -1,1 +1,25 @@
-<p>Where & When</p>
+<div class="text-content text-content--centered">
+    
+    <h3 class="icon-text icon-text--location heading-4">
+        <a href="/transport-and-accomodation">Stratton Court Barn, Stratton Aubley, Bicester, OX27 9AJ</a>
+    </h3>
+
+    <h3 class="icon-text icon-text--date heading-4">
+        Saturday 6th May 2023
+    </h3>
+    
+    <h3 class="icon-text icon-text--time heading-4">
+        12.30PM arrvial for the ceremony at 1PM
+    </h3>
+
+    <div class="text-content__cta">
+        {% render "components/molecules/countdown" %}
+    </div>
+    
+    <div class="text-content__cta">
+        {% render "components/atoms/call-to-action"
+            url: "/calendar.ics"
+            text: "Add to calendar"
+        %}
+    </div>
+</div>

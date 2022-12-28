@@ -137,19 +137,6 @@
     }
 }
 
-.countdown {
-    visibility: hidden;
-
-    &.is-visible {
-        visibility: visible;
-    }
-
-    &__days {
-        display: block;
-        line-height: 0;
-    }
-}
-
 .footer-image {
     display: block;
     width: 100%;
