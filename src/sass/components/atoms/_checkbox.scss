@@ -39,6 +39,10 @@
         font-size: 0.8rem;
         display: grid;
         align-self: center;
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
     }
 
     &__input {
