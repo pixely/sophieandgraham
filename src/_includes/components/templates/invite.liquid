@@ -41,10 +41,10 @@
     
     </div>
     <div class="overview__section-title">
-      <h2 class="heading-2">Order of the day</h2>
+      <h2 class="heading-2">Order of the {{ invite['Invite Type'] }}</h2>
     </div>
     <div class="overview__section-content">
-      {% render "components/organisms/order-of-the-day" %}
+      {% render "components/organisms/order-of-the-day" inviteType: invite['Invite Type'] %}
     </div>
   </div>
 
