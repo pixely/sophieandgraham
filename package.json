@@ -5,11 +5,11 @@
   "browserslist": "last 1 version, >1%",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:sass": "parcel watch src/js/app.js --dist-dir=_site",
-    "build:sass": "parcel build src/js/app.js --dist-dir=_site",
+    "watch:static": "parcel watch src/js/app.js --dist-dir=_site",
+    "build:static": "parcel build src/js/app.js --dist-dir=_site",
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
-    "start": "npm-run-all build:sass --parallel watch:*",
+    "start": "npm-run-all build:static --parallel watch:*",
     "build": "npm-run-all build:*"
   },
   "repository": {
