@@ -14,7 +14,7 @@
           {% capture field_yes %}{{person.id}}-yes{% endcapture %}
           {% capture field_no %}{{person.id}}-no{% endcapture %}
 
-          <fieldset class="form__fieldset">
+          <fieldset class="form__fieldset js-rsvp-select">
             <div class="form__fieldset-title">
               <h3 class="heading-3">{{ person['Name'] }}'s RSVP</h3>
             </div>
@@ -28,66 +28,69 @@
         {% endfor %}
       </div>
 
-      {% render "components/atoms/button", text: "Continue" %}
+      {% render "components/atoms/button", text: "Continue", type: "button", disabled: true, class: 'js-continue' %}
 
       {% render "components/atoms/section-break" %}
 
-      <div class="form__subtitle">
-        <h2 class="heading-2">
-          {% if invite['Invite Type'] == 'Day' %}
-            Your meal choice
-          {% else %}
-            Your dietary requirements
-          {% endif %}
-        </h2>
-      </div>
+      <div class="form--hidden js-meal-choices">
 
-      <div class="form__section">
-
-        {% for person in invite.people %}
-
-          <fieldset class="form__fieldset">
-
+        <div class="form__subtitle">
+          <h2 class="heading-2">
             {% if invite['Invite Type'] == 'Day' %}
-              {% capture field_name %}{{person.id}}-meal{% endcapture %}
-              {% capture field_yes %}{{person.id}}-yes{% endcapture %}
-              {% capture field_no %}{{person.id}}-no{% endcapture %}
+              Your meal choice
+            {% else %}
+              Your dietary requirements
+            {% endif %}
+          </h2>
+        </div>
 
-              <div class="form__fieldset-title">
-                <h3 class="heading-3">{{ person['Name'] }}'s Meal</h3>
-              </div>
+        <div class="form__section">
 
-              {% for meal in menu %}
+          {% for person in invite.people %}
+
+            <fieldset class="form__fieldset">
+
+              {% if invite['Invite Type'] == 'Day' %}
                 {% capture field_name %}{{person.id}}-meal{% endcapture %}
-                {% capture field_id %}{{person.id}}-{{meal['Name']}}{% endcapture %}
-                
-                <div class="form__field">
-                  {% render "components/atoms/checkbox", name: field_name, id: field_id, label: meal['Description'] %}
+                {% capture field_yes %}{{person.id}}-yes{% endcapture %}
+                {% capture field_no %}{{person.id}}-no{% endcapture %}
+
+                <div class="form__fieldset-title">
+                  <h3 class="heading-3">{{ person['Name'] }}'s Meal</h3>
                 </div>
-              {% endfor %}
-            {% endif %}
 
-          </fieldset>
+                {% for meal in menu %}
+                  {% capture field_name %}{{person.id}}-meal{% endcapture %}
+                  {% capture field_id %}{{person.id}}-{{meal['Name']}}{% endcapture %}
+                  
+                  <div class="form__field">
+                    {% render "components/atoms/checkbox", name: field_name, id: field_id, label: meal['Description'] %}
+                  </div>
+                {% endfor %}
+              {% endif %}
 
-          <fieldset class="form__fieldset">
+            </fieldset>
 
-            {% if invite['Invite Type'] == 'Evening' %}
-              <div class="form__fieldset-title">
-                <h3 class="heading-3">{{ person['Name'] }}'s Dietery Requirements</h3>
-              </div>
-            {% endif %}
+            <fieldset class="form__fieldset">
 
-            {% capture field_name %}{{person.id}}-dietary{% endcapture %}
-            {% render "components/atoms/textarea", name: field_name, label: "Please let us know if you have any dietary requirements or allergies" %}
+              {% if invite['Invite Type'] == 'Evening' %}
+                <div class="form__fieldset-title">
+                  <h3 class="heading-3">{{ person['Name'] }}'s Dietery Requirements</h3>
+                </div>
+              {% endif %}
+
+              {% capture field_name %}{{person.id}}-dietary{% endcapture %}
+              {% render "components/atoms/textarea", name: field_name, label: "Please let us know if you have any dietary requirements or allergies" %}
+            
+            </fieldset>
           
-          </fieldset>
+          {% endfor %}
         
-        {% endfor %}
-      
+        </div>
+  
+        {% render "components/atoms/button", text: "Confirm choices" disabled: true %}
+  
       </div>
-
-      {% render "components/atoms/button", text: "Confirm choices" %}
-
   </form>
 
 {% endblock %}

@@ -11,19 +11,25 @@
     align-items: center;
     text-decoration: none;
     text-transform: uppercase;
-    transition: background .3s linear;
+    transition: background .3s linear, opacity .4s ease-in-out;
     border: $color-primary-dark;
     display: block;
     width: 100%;
     outline: none;
     
-    &:hover {
-        background: $color-primary-dark;
-        cursor: pointer;
+    &[disabled] {
+        opacity: 0.2;
+        cursor: default;
     }
 
-    &:focus {
-        box-shadow: 0px 0px 0px 2px $color-highlights;
+    &:not([disabled]){
+        &:hover {
+            background: $color-primary-dark;
+            cursor: pointer;
+        }
+    
+        &:focus {
+            box-shadow: 0px 0px 0px 2px $color-highlights;
+        }
     }
-
 }
