@@ -104,3 +104,6 @@ dist
 .tern-port
 _site/
 .parcel-cache
+
+# Local Netlify folder
+.netlify
