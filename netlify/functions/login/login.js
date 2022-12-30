@@ -1,13 +1,30 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
+require("dotenv").config();
+
+const AirTable = require("airtable");
+
 const handler = async (event) => {
   try {
-    const subject = event.queryStringParameters.name || 'World'
+    const inviteCode = event.queryStringParameters.invite;
+    let valid = false;
+    let id = null;
+
+    if (inviteCode ) {
+      const airtableData = new AirTable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE);
+      const inviteList = await airtableData("Invite List").select({
+        view: "Grid view",
+        filterByFormula: `{Invite Code} = "${inviteCode.toUpperCase().trim()}"`,
+        maxRecords: 1,
+      }).all();
+      if (inviteList.length === 1) {
+        valid = true;
+        id = inviteList[0].fields['Invite Code'];
+        console.log(inviteList);
+      }
+    }
+     
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
+      body: JSON.stringify({ inviteFound: valid, inviteCode: id }),
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
