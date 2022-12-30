@@ -37,4 +37,12 @@
         margin-top: $spacing-s;
         font-size: 0.8rem;
     }
+
+    &__label {
+        display: inline-block;
+        margin-bottom: $spacing-xs;
+        padding-left: $spacing-s;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+    }
 }

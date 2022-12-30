@@ -1,7 +1,11 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  <form class="form" action="/{{ invite['Invite Code'] }}/thank-you/" data-module="rsvp">
+  <form class="form js-rsvp-form" action="/{{ invite['Invite Code'] }}/thank-you/" data-module="rsvp">
+    
+    <input type="hidden" name="invite" value="{{ invite.id }}" />
+    <input type="hidden" name="guests" value="{{ invite['Invitees'] | join: ',' }}" />
+  
     <div class="form__title">
       <h1 class="heading-2">RVSP</h1>
     </div>
@@ -44,7 +48,7 @@
 
       {% render "components/atoms/button", text: "Continue", type: "button", disabled: true, class: 'js-continue' %}
 
-      <p class="form__validation js-validation-1 is-hidden"><em>Please select your RSVP to continue</em></p>
+      <p class="form__validation js-validation-1 is-hidden">Please select your RSVP to continue</p>
 
       <div class="is-hidden js-meal-choices">
 
@@ -81,7 +85,7 @@
 
                   {% for meal in menu %}
                     {% capture field_name %}{{person.id}}-meal{% endcapture %}
-                    {% capture field_id %}{{person.id}}-{{meal['Name']}}{% endcapture %}
+                    {% capture field_id %}{{person.id}}-{{meal.id}}{% endcapture %}
                     {% assign menu_choice = person['Menu Choice'] %}
                     {% assign menu_id = meal['id'] %}
                     {% capture field_selected %}{% if menu_choice contains menu_id %}true{% else %}false{% endif %}{% endcapture %}
@@ -124,7 +128,7 @@
   
         {% render "components/atoms/button", text: "Confirm choices" disabled: true, class: 'js-confirm' %}
 
-        <p class="form__validation js-validation-2 is-hidden"><em>Please select your meal choices</em></p>
+        <p class="form__validation js-validation-2 is-hidden">Please select your meal choices</p>
 
       </div>
   </form>

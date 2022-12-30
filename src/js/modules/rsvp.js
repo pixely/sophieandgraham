@@ -2,6 +2,7 @@ export function init() {
     const rsvpSelectsSelector = '.js-rsvp-select input';
     const mealSelectSelector = '.js-meal-select input';
     const isHidden = "is-hidden";
+    const rsvpForm = document.querySelector('.js-rsvp-form');
     const continueButton = document.querySelector('.js-continue');
     const mealChoiceSection = document.querySelector('.js-meal-choices');
     const mealChoiceHeader = document.querySelector('.js-meal-choice-header');
@@ -92,4 +93,51 @@ export function init() {
     }); 
 
     validateRsvps();
+
+    rsvpForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        console.log('rsvp form submit');
+
+        const formData = new FormData(rsvpForm);
+        const plainFormData = Object.fromEntries(formData.entries());
+        
+        console.log(plainFormData);
+
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(plainFormData),
+        };
+
+        console.log(fetchOptions);
+
+        // resetState();
+        
+        // const queryParams = { invite: loginInput.value };
+
+        // loginButton.innerHTML = "Checking...";
+
+        fetch('/.netlify/functions/rsvp', fetchOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                // if (data.inviteFound === true && data.inviteCode) {
+                //     window.location.replace(`/${data.inviteCode}/`); 
+                // } else {
+                //     resetState();
+                //     loginForgotten.classList.add(isHidden);
+                //     loginNotFound.classList.remove(isHidden);
+                // }
+            })
+            .catch((error) => {
+                // resetState();
+                // loginForgotten.classList.add(isHidden);
+                // loginError.classList.remove(isHidden);
+                console.error(error);
+            });
+    });
+
 }
