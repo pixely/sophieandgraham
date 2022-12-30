@@ -1,5 +1,12 @@
 <label class="checkbox" for="person-{{ id }}">
     <span class="checkbox__label{% if uppercase == true %} checkbox__label--uppercase{% endif %}">{{ label }}</span>
-    <input type="radio" class="checkbox__input" name="{{ name }}" value="{{ id }}" id="person-{{ id }}" />
+    <input 
+        type="radio" 
+        class="checkbox__input" 
+        name="{{ name }}" 
+        value="{{ id }}"
+        id="person-{{ id }}"
+        {% if checked == "true" %}checked{% endif %} 
+    />
 </label>
 
