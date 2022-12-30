@@ -18,7 +18,6 @@ const handler = async (event) => {
       if (inviteList.length === 1) {
         valid = true;
         id = inviteList[0].fields['Invite Code'];
-        console.log(inviteList);
       }
     }
      

@@ -13,3 +13,9 @@ if (dynamicModules.includes('rsvp')) {
         rsvp.init();
     });
 }
+
+if (dynamicModules.includes('login')) {
+    import("./modules/login").then(function (login) {
+        login.init();
+    });
+}

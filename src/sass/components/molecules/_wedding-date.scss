@@ -5,6 +5,7 @@
     grid-template-columns: repeat(3, auto);
     align-items: stretch;
     line-height: 1;
+    font-weight: $font-weight-regular;
 
     &__end {
         border-top: $highlights-width solid $color-highlights;
