@@ -4,12 +4,11 @@ const AirTable = require("airtable");
 
 const handler = async (event) => {
   try {
-    const subject = event.queryStringParameters.name || 'World';
     const params = JSON.parse(event.body);
-
     const inviteId = params.invite;
     const invitees = params.guests?.split(',');
 
+    let updateSuccess = false;
     let updatedRecords = 0;
 
     const retrieveFromParams = (guestId, paramKey) => {
@@ -28,9 +27,33 @@ const handler = async (event) => {
       );
     };
 
-    
-    // if (inviteId && invitees) {
-      const airtableData = new AirTable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE);
+    const rsvpType = (guests) => {
+      let attend = 0;
+      let decline = 0;
+      let type = 'mixed';
+
+      guests.forEach((guest) => {
+          const attending = retrieveFromParams(guest, "attend");
+          if (attending == 'yes') {
+            attend++;
+          } else if (attending == 'no') {
+            decline++;
+          }
+        });
+
+      if(attend == guests.length) {
+        type = 'yes';
+      } else if (decline == guests.length) {
+        type = 'no';
+      }
+
+      return type;
+    };
+
+    const airtableData = new AirTable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE);
+    const invite = await airtableData("Invite List").find(inviteId);
+
+    if (inviteId && invitees) {
       
       // const results = await airtableData("Guest List").update(formatGuestUpdate(invitees), function(err, records) {
       //   if (err) {
@@ -48,25 +71,25 @@ const handler = async (event) => {
       // });
       
       const results = await airtableData("Guest List").update(formatGuestUpdate(invitees));
-
-      console.log(results);
       
+      if (invitees.length === results.length) {
+        updateSuccess = true;
 
-      console.log(updatedRecords);
-      
-      if (invitees.length === updatedRecords) {
-        console.log('all good');
+        await airtableData("Invite List").update([{
+          id: inviteId,
+          fields: {
+            "Status": invite.fields['Status'] == "Saved" ? "Saved & Updated" : "Saved",
+          }
+        }]);
       } else {
         console.log('error');
-      }
-      
+      }      
 
-    // }
-
+    }
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}`, ...params }),
+      body: JSON.stringify({ success: updateSuccess, type: rsvpType(invitees), inviteCode: invite.fields['Invite Code'] }),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
       // isBase64Encoded: true,

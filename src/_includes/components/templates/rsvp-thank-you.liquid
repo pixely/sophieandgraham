@@ -3,10 +3,10 @@
 {% block content %}
   <form class="form">
     <div class="form__title">
-      <h1 class="heading-2">Thank you</h1>
+      <h1 class="heading-2">Thank you{% if type != "no" %}!{% endif %}</h1>
     </div>
     <div class="form__subtitle">
-      <h2 class="heading-4">We're so excited you'll be celebrating our special day with us!</h2>
+      <h2 class="heading-4">{{ message }}</h2>
     </div>
     <div class="form__section">
         {% capture field_name %}{{invite.id}}-message{% endcapture %}

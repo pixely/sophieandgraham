@@ -12,6 +12,8 @@ export function init() {
     const confirmButton = document.querySelector('.js-confirm');
     const rsvpValidation = document.querySelector('.js-validation-1');
     const mealValidation = document.querySelector('.js-validation-2');
+    const rsvpError = document.querySelector('.js-rsvp-error');
+    const originalButtonText = confirmButton.innerHTML;
 
     let expectedMealChoices = 0;
     
@@ -96,13 +98,13 @@ export function init() {
 
     rsvpForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        console.log('rsvp form submit');
+    
+        rsvpError.classList.add(isHidden);
+        confirmButton.innerHTML = "Checking...";
 
         const formData = new FormData(rsvpForm);
         const plainFormData = Object.fromEntries(formData.entries());
-        
-        console.log(plainFormData);
-
+    
         const fetchOptions = {
             method: 'POST',
             headers: {
@@ -112,30 +114,22 @@ export function init() {
             body: JSON.stringify(plainFormData),
         };
 
-        console.log(fetchOptions);
-
-        // resetState();
-        
-        // const queryParams = { invite: loginInput.value };
-
-        // loginButton.innerHTML = "Checking...";
-
         fetch('/.netlify/functions/rsvp', fetchOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                // if (data.inviteFound === true && data.inviteCode) {
-                //     window.location.replace(`/${data.inviteCode}/`); 
-                // } else {
-                //     resetState();
-                //     loginForgotten.classList.add(isHidden);
-                //     loginNotFound.classList.remove(isHidden);
-                // }
+                if (data.success === true && data.type) {
+                    window.location.replace(`/${data.inviteCode}/thank-you/${data.type}/`); 
+                } else {
+                    mealValidation.classList.add(isHidden);
+                    rsvpError.classList.remove(isHidden);
+                }
+                confirmButton.innerHTML = originalButtonText;
             })
             .catch((error) => {
-                // resetState();
-                // loginForgotten.classList.add(isHidden);
-                // loginError.classList.remove(isHidden);
+                mealValidation.classList.add(isHidden);
+                rsvpError.classList.remove(isHidden);
+                confirmButton.innerHTML = originalButtonText;
                 console.error(error);
             });
     });
