@@ -1,7 +1,9 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  <form class="form">
+  <form class="form js-message-form" action="/{{ invite['Invite Code'] }}/" data-module="message">
+    <input type="hidden" name="invite" value="{{ invite.id }}" />
+    <input type="hidden" name="form-name" value="thank-you" />
     <div class="form__title">
       <h1 class="heading-2">Thank you{% if type != "no" %}!{% endif %}</h1>
     </div>
@@ -9,11 +11,15 @@
       <h2 class="heading-4">{{ message }}</h2>
     </div>
     <div class="form__section">
-        {% capture field_name %}{{invite.id}}-message{% endcapture %}
-        {% render "components/atoms/textarea", name: field_name, label: "Leave a message" %}       
+        {% render "components/atoms/textarea", name: "message", label: "Leave a message" %}       
     </div>
 
-    {% render "components/atoms/button", text: "Finish" %}
+    {% render "components/atoms/button", text: "Finish" class: "js-message-submit" %}
+
+    <div class="form__validation js-message-error is-hidden">
+      <h3 class="heading-4">Uh oh, something went wrong</h3>
+    </div>
+
   </form>
 
 {% endblock %}

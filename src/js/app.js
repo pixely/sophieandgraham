@@ -19,3 +19,9 @@ if (dynamicModules.includes('login')) {
         login.init();
     });
 }
+
+if (dynamicModules.includes('message')) {
+    import("./modules/message").then(function (message) {
+        message.init();
+    });
+}

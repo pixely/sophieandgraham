@@ -1,7 +1,8 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  <form class="form">
+  <form class="form js-message-form" action="/" data-module="message">
+    <input type="hidden" name="form-name" value="contact" />
     <div class="form__title">
       <h1 class="heading-2">Contact</h1>
     </div>
@@ -31,8 +32,11 @@
           </fieldset>
       </div>
 
-      {% render "components/atoms/button", text: "Send to Sophie &amp; Graham" %}
+      {% render "components/atoms/button", text: "Send to Sophie &amp; Graham" class: "js-message-submit" %}
 
+      <div class="form__validation js-message-error is-hidden">
+        <h3 class="heading-4">Uh oh, something went wrong</h3>
+      </div>
 
   </form>
 
