@@ -34,6 +34,10 @@
     &__contents {
         padding-bottom: $spacing-s;
         text-transform: none;
+
+        *:not(:last-child) {
+            margin-bottom: $spacing-s;
+        }
     }
 
     &[open] {
