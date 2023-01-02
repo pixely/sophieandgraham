@@ -32,7 +32,7 @@
                 %}
             </div>
 
-            <h2 class="heading-4">Please RSVP by the 16th February</h2>
+            <h2 class="heading-4">Please RSVP by the {{ invite.formatted_deadline }}</h2>
         {% else %}
             <div class="invite-header__cta">
                 {% render "components/atoms/call-to-action-primary"

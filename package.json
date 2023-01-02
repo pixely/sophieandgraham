@@ -39,6 +39,7 @@
   "dependencies": {
     "@11ty/eleventy-img": "^2.0.1",
     "@sardine/eleventy-plugin-tinyhtml": "^0.2.0",
+    "luxon": "^3.2.0",
     "node-fetch": "^2.6.7",
     "normalize.css": "^8.0.1",
     "uuid": "^9.0.0"
