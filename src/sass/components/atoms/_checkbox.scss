@@ -11,7 +11,7 @@
         white-space: nowrap; 
         width: 1px;
     }
-    
+
     &__label-container {
         display: grid;
         grid-template-columns: min-content 1fr min-content;
@@ -47,22 +47,22 @@
             transition-delay: 0, 0, 0.1;
         }
 
-        &__label {
-            grid-column: 2;
-            font-size: 0.8rem;
-            display: grid;
-            align-self: center;
-
-            &--uppercase {
-                text-transform: uppercase;
-            }
-        }
-
         &:hover {
             cursor: pointer;
             border-color: $color-grey-dark;
-        }
+        }    
     }
+
+    &__label {
+        grid-column: 2;
+        line-height: 1.25;
+        display: grid;
+        align-self: center;
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
+    }   
 
     .checkbox__input:focus + .checkbox__label-container {
         box-shadow: 0px 0px 0px 2px $color-highlights;
