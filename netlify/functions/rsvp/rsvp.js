@@ -12,7 +12,14 @@ const handler = async (event) => {
     let updatedRecords = 0;
 
     const retrieveFromParams = (guestId, paramKey) => {
-      return params[`${guestId}-${paramKey}`].replace(`${guestId}-`,'');
+      return params[`${guestId}-${paramKey}`]?.replace(`${guestId}-`,'');
+    };
+
+    const arrayIfThere = (param) => {
+      if (param) {
+        return [param];
+      }
+      return param;
     };
 
     const formatGuestUpdate = (guests) => {
@@ -20,7 +27,7 @@ const handler = async (event) => {
           id: guest,
           fields: {
             "Attending": retrieveFromParams(guest, "attend"),
-            "Menu Choice": [retrieveFromParams(guest, "meal")],
+            "Menu Choice": arrayIfThere(retrieveFromParams(guest, "meal")),
             "Dietary Requirements": retrieveFromParams(guest, "dietary"),
           },
         })
