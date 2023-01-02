@@ -57,7 +57,39 @@
 <details class="expand text-s">
     <summary class="expand__summary">Can I bring a plus one?</summary>
     <div class="expand__contents">
-        <p>No sorry, only those named on your invite can be accommodated as it is a small venue and we are limited on numbers</p>
+        <p>No sorry, only those named on your invite can be accommodated as it is a small venue and we are limited on numbers.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">What time does the wedding finish?</summary>
+    <div class="expand__contents">
+        <p>Music stops at 11.30pm and you'll need to be off the premises by midnight.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Where are the ceremony and reception taking place?</summary>
+    <div class="expand__contents">
+        <p>Both the ceremony and reception will be held at Stratton Court Barn, Stratton Audley, Bicester OX27 9AJ.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Will the wedding be indoors or outdoors?</summary>
+    <div class="expand__contents">
+        <p>The ceremony will be held indoors but weather permitting parts of the day will be spent outside.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">What time should I arrive?</summary>
+    <div class="expand__contents">
+        {% if invite['Invite Type'] == "Day" %}
+            <p>Please arrive between 12-12.30pm, the ceremony will begin at 1pm.</p>
+        {% elsif invite['Invite Type'] == "Evening" %}
+            <p>Please arrive from 6.30pm, our first dance will be shortly after</p>
+        {% endif %}
     </div>
 </details>
 
@@ -67,4 +99,3 @@
         <p>Not to worry, just pop us a message on our <a href="/contact">contact page</a> and we'll get back to you ASAP</p>
     </div>
 </details>
-
