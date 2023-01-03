@@ -20,33 +20,77 @@
           {% capture field_confirmed_yes %}{% if person['Attending'] == "Yes" %}true{% endif %}{% endcapture %}
           {% capture field_confirmed_no %}{% if person['Attending'] == "No" %}true{% endif %}{% endcapture %}
 
-          <fieldset class="form__fieldset js-rsvp-select">
-            <div class="form__fieldset-title">
-              <h3 class="heading-3">{{ person['Name'] }}'s RSVP</h3>
-            </div>
-            <div class="form__field">
-              {% render "components/atoms/checkbox", 
-                name: field_name, 
-                id: field_yes, 
-                label: "Gladly Accept",
-                checked: field_confirmed_yes
-              %}
-            </div>
-            <div class="form__field">
-              {% render "components/atoms/checkbox", 
-                name: field_name, 
-                id: field_no, 
-                label: "Regretfully Decline",
-                checked: field_confirmed_no 
-              %}
-            </div>
-          </fieldset>
+          {% if person['Plus1'] == true %}
+          <fieldset class="form__fieldset js-rsvp-select js-guest-select is-hidden">
+              <div class="form__fieldset-title">
+                <h3 class="heading-3">Your guest</h3>
+              </div>
+              <div class="form__field">
+                {% render "components/atoms/checkbox", 
+                  name: field_name, 
+                  id: field_yes, 
+                  label: "I will be bringing a guest",
+                  checked: field_confirmed_yes
+                %}
+              </div>
+              <div class="form__field">
+                {% render "components/atoms/checkbox", 
+                  name: field_name, 
+                  id: field_no, 
+                  label: "I won't be bringing a guest",
+                  checked: field_confirmed_no 
+                %}
+              </div>
+            </fieldset>
+            {% else %}
+            <fieldset class="form__fieldset js-rsvp-select">
+              <div class="form__fieldset-title">
+                <h3 class="heading-3">{{ person['Name'] }}'s RSVP</h3>
+              </div>
+              <div class="form__field">
+                {% render "components/atoms/checkbox", 
+                  name: field_name, 
+                  id: field_yes, 
+                  label: "Gladly Accept",
+                  checked: field_confirmed_yes
+                %}
+              </div>
+              <div class="form__field">
+                {% render "components/atoms/checkbox", 
+                  name: field_name, 
+                  id: field_no, 
+                  label: "Regretfully Decline",
+                  checked: field_confirmed_no 
+                %}
+              </div>
+            </fieldset>
+            {% endif %}
+
+            {% comment %} Text input for guest name only if guest is a +1 {% endcomment %}
+            {% if person['Plus1'] == true %}
+              <fieldset class="form__fieldset js-guest-name is-hidden">
+                {% capture field_guest_name %}{{person.id}}-name{% endcapture %}
+                {% capture field_guest_id %}guest-{{person.id}}{% endcapture %}
+                <div class="form__fieldset-title">
+                  <label class="heading-3" for="{{ field_guest_id }}">Your guest's name</label>
+                </div>
+                <div class="form__field">
+                  {% render "components/atoms/text-input", 
+                    name: field_guest_name, 
+                    id: field_guest_id,
+                    class: 'js-guest-name-input'
+                  %}
+                  <p class="form__validation">All guests must be over 18</p>
+                </div>
+            </fieldset>
+            {% endif %}
         {% endfor %}
       </div>
 
       {% render "components/atoms/button", text: "Continue", type: "button", disabled: true, class: 'js-continue' %}
 
       <p class="form__validation js-validation-1 is-hidden">Please select your RSVP to continue</p>
+      <p class="form__validation js-validation-2 is-hidden">Please enter your guest's name to continue</p>
 
       <div class="is-hidden js-meal-choices">
 
@@ -105,7 +149,7 @@
 
                 {% if invite['Invite Type'] == 'Evening' %}
                   <div class="form__fieldset-title">
-                    <h3 class="heading-3">{{ person['Name'] }}'s Dietery Requirements</h3>
+                    <h3 class="heading-3"><span class="js-name-inline" data-id="guest-{{ person.id }}">{{ person['Name'] }}</span>'s Dietery Requirements</h3>
                   </div>
                 {% endif %}
 
@@ -126,7 +170,7 @@
   
         {% render "components/atoms/button", text: "Confirm choices" disabled: true, class: 'js-confirm' %}
 
-        <p class="form__validation js-validation-2 is-hidden">Please select your meal choices</p>
+        <p class="form__validation js-validation-3 is-hidden">Please select your meal choices</p>
 
         <div class="form__validation js-rsvp-error is-hidden">
           <h3 class="heading-4">Uh oh, something went wrong</h3>

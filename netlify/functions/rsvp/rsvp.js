@@ -29,6 +29,7 @@ const handler = async (event) => {
             "Attending": retrieveFromParams(guest, "attend"),
             "Menu Choice": arrayIfThere(retrieveFromParams(guest, "meal")),
             "Dietary Requirements": retrieveFromParams(guest, "dietary"),
+            "Name": retrieveFromParams(guest, "name"),
           },
         })
       );
