@@ -14,6 +14,7 @@ export function init() {
     const mealValidation = document.querySelector('.js-validation-2');
     const rsvpError = document.querySelector('.js-rsvp-error');
     const originalButtonText = confirmButton.innerHTML;
+    const continuePress = false;
 
     let expectedMealChoices = 0;
     
@@ -56,6 +57,14 @@ export function init() {
                 mealChoiceHeader.classList.remove(isHidden);
             }
 
+            if (continuePress === false && acceptCount == 0 && (selectedCount == rsvpSelectGroups.length)) {
+                continueButton.classList.add(isHidden);
+                mealChoiceSection.classList.remove(isHidden);
+            } else {
+                continueButton.classList.remove(isHidden);
+                mealChoiceSection.classList.add(isHidden);    
+            }
+
             expectedMealChoices = acceptCount;
         });
         validateMealChoices();
@@ -84,6 +93,7 @@ export function init() {
 
     // show meal choice section on press of continue button
     continueButton.addEventListener('click', (event) => {
+        continuePress = true;
         continueButton.classList.add(isHidden);
         mealChoiceSection.classList.remove(isHidden);
     });
