@@ -72,7 +72,7 @@
                 {% capture field_guest_name %}{{person.id}}-name{% endcapture %}
                 {% capture field_guest_id %}guest-{{person.id}}{% endcapture %}
                 <div class="form__fieldset-title">
-                  <label class="heading-3" for="{{ field_guest_id }}">Your guest's name</label>
+                  <label class="heading-3" for="{{ field_guest_id }}">Your guest's full name</label>
                 </div>
                 <div class="form__field">
                   {% render "components/atoms/text-input", 
