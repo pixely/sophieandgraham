@@ -1,8 +1,9 @@
+import { hide, show, disable, enable } from '../utils';
+
 export function init() {
     const rsvpSelectsSelector = '.js-rsvp-select input';
     const mealSelectSelector = '.js-meal-select input';
     const guestInlineName = '.js-name-inline';
-    const isHidden = "is-hidden";
     const rsvpForm = document.querySelector('.js-rsvp-form');
     const continueButton = document.querySelector('.js-continue');
     const mealChoiceSection = document.querySelector('.js-meal-choices');
@@ -36,50 +37,35 @@ export function init() {
         const validState = false;
         const guestSelect = document.querySelector(guestSelectSelector);
 
-        console.log('all', rsvpSelectGroups);
-        console.log('guests', [...new Set([...document.querySelectorAll('.js-guest-select input')].map((el) => el.name))]);
-
         const all = rsvpSelectGroups;
         const guest = [...new Set([...document.querySelectorAll('.js-guest-select input')].map((el) => el.name))];
         const filters = all.filter((person) => !guest.includes(person));
         
         filters.map((person) => {
             if(document.querySelector(`input[name="${person}"][value$="-yes"]:checked`)) {
-                console.log('show guest');
                 showGuest = true;
             }
         })
-        console.log('filters', filters);
+        
+        if (guestSelect){
+            show(guestName);
+            
+            // Set inline text with new guest name
+            document.querySelector(`${guestInlineName}[data-id="${guestNameInput.id}"]`)?.innerHTML = guestNameInput.value;
 
-        console.log('checkGuests', guestSelect);
-        console.log('guest name', guestNameInput.value);
-
-        // [...guestSelect].forEach((select) => {
-            // console.log(`[name="${select.name}"]:checked`);
-            // console.log(document.querySelector(`[name="${select.name}"][value$="-yes"]:checked`));
-            if (guestSelect){
-                guestName.classList.remove(isHidden);
-
-                console.log('show guest name', validState);
-                
-                // Set inline text with new guest name
-                document.querySelector(`${guestInlineName}[data-id="${guestNameInput.id}"]`)?.innerHTML = guestNameInput.value;
-
-                if(guestNameInput.value && guestNameInput.value !== '') {
-                    validState = true;
-                    console.log('input valid');
-                }
-            } else {
-                guestName.classList.add(isHidden);
+            if(guestNameInput.value && guestNameInput.value !== '') {
                 validState = true;
             }
-        // });
-
-        if (showGuest) {
-            document.querySelector('.js-guest-select').classList.remove(isHidden);
         } else {
-            document.querySelector('.js-guest-select').classList.add(isHidden);
-            guestName.classList.add(isHidden);
+            hide(guestName);
+            validState = true;
+        }
+        
+        if (showGuest) {
+            show(document.querySelector('.js-guest-select'));
+        } else {
+            hide(document.querySelector('.js-guest-select'));
+            hide(guestName);
             validState = true;
         }
 
@@ -90,21 +76,21 @@ export function init() {
         const validGuests = checkGuests();
         const validRsvps = checkRsvps();
 
-        rsvpValidation.classList.add(isHidden);
-        guestValidation.classList.add(isHidden);
-
+        hide(rsvpValidation);
+        hide(guestValidation);
+        
         if (validGuests && validRsvps) {
-            continueButton.removeAttribute('disabled');
+            enable(continueButton);
         } else {
-            continueButton.setAttribute('disabled', true);
+            disable(continueButton);
             if(!validGuests) {
-                guestValidation.classList.remove(isHidden);
+                show(guestValidation);
             } else {
-                rsvpValidation.classList.remove(isHidden);
+                show(rsvpValidation);
             }
             continuePress = false;
-            continueButton.classList.remove(isHidden);
-            mealChoiceSection.classList.add(isHidden);
+            show(continueButton);
+            hide(mealChoiceSection);
         }
 
         checkVisibleMealChoices();
@@ -117,27 +103,27 @@ export function init() {
             document.querySelectorAll(`[name="${select}"]:checked`).forEach((input) => {
                 selectedCount++;
                 if(input.value.includes('yes')) {
-                    document.querySelector(`.js-meal-${select}`).classList.remove(isHidden);
+                    show(document.querySelector(`.js-meal-${select}`));
                     acceptCount++;
                 } else {
-                    document.querySelector(`.js-meal-${select}`).classList.add(isHidden);
+                    hide(document.querySelector(`.js-meal-${select}`));
                 }
             });
             
             if (acceptCount == 0 && (selectedCount == rsvpSelectGroups.length)) {
-                mealChoiceHeader.classList.add(isHidden);
+                hide(mealChoiceHeader);
             } else {
-                mealChoiceHeader.classList.remove(isHidden);
+                show(mealChoiceHeader);
             }
 
             if (continuePress === false && acceptCount == 0 && (selectedCount == rsvpSelectGroups.length)) {
-                continueButton.classList.add(isHidden);
-                mealChoiceSection.classList.remove(isHidden);
+                hide(continueButton);
+                show(mealChoiceSection);
             } else if (continuePress === false) {
-                continueButton.classList.remove(isHidden);
-                mealChoiceSection.classList.add(isHidden);    
+                show(continueButton);
+                hide(mealChoiceSection);    
             } else if (continuePress) {
-                mealChoiceSection.classList.remove(isHidden);
+                show(mealChoiceSection);
             }
 
             expectedMealChoices = acceptCount;
@@ -147,16 +133,16 @@ export function init() {
 
     const validateMealChoices = () => {
         const selectedCount = 0;
-        confirmButton.setAttribute('disabled', true);
-        mealValidation.classList.remove(isHidden);
-
+        disable(confirmButton);
+        show(mealValidation);
+        
         document.querySelectorAll(`${rsvpSelectsSelector}[value$="-yes"]:checked`).forEach((select) => {
             if (document.querySelector(`[name="${select.name.replace('attend', 'meal')}"]:checked`)) selectedCount++;
         });
 
         if (selectedCount == expectedMealChoices || mealSelects.length === 0) {
-            confirmButton.removeAttribute('disabled'); 
-            mealValidation.classList.add(isHidden);   
+            enable(confirmButton); 
+            hide(mealValidation);
         }
     }
 
@@ -170,10 +156,10 @@ export function init() {
     guestNameInput.addEventListener('change', validateRsvps);
 
     // show meal choice section on press of continue button
-    continueButton.addEventListener('click', (event) => {
+    continueButton.addEventListener('click', () => {
         continuePress = true;
-        continueButton.classList.add(isHidden);
-        mealChoiceSection.classList.remove(isHidden);
+        hide(continueButton);
+        show(mealChoiceSection);
     });
 
     // show confirm button
@@ -187,7 +173,8 @@ export function init() {
     rsvpForm.addEventListener('submit', (event) => {
         event.preventDefault();
     
-        rsvpError.classList.add(isHidden);
+        hide(rsvpError);
+
         confirmButton.innerHTML = "Checking...";
 
         const formData = new FormData(rsvpForm);
@@ -209,14 +196,14 @@ export function init() {
                 if (data.success === true && data.type) {
                     window.location.replace(`/${data.inviteCode}/thank-you/${data.type}/`); 
                 } else {
-                    mealValidation.classList.add(isHidden);
-                    rsvpError.classList.remove(isHidden);
+                    hide(mealValidation);
+                    show(rsvpError);
                 }
                 confirmButton.innerHTML = originalButtonText;
             })
             .catch((error) => {
-                mealValidation.classList.add(isHidden);
-                rsvpError.classList.remove(isHidden);
+                hide(mealValidation);
+                show(rsvpError);
                 confirmButton.innerHTML = originalButtonText;
                 console.error(error);
             });
