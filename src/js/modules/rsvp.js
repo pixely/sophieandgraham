@@ -1,11 +1,5 @@
 import { hide, show, disable, enable } from '../utils';
 
-const state = {
-    guestCount: 0,
-    checkedCount: 0,
-    acceptedCount: 0,
-};
-
 export function init() {
     const rsvpSelectsSelector = '.js-rsvp-select input';
     const mealSelectSelector = '.js-meal-select input';
@@ -25,7 +19,13 @@ export function init() {
     const guestSelectSelector = '.js-guest-select input[value$="-yes"]:checked';
     const guestName = document.querySelector('.js-guest-name');
     const guestNameInput = document.querySelector('.js-guest-name-input');
-    
+
+    const state = {
+        guestCount: 0,
+        checkedCount: 0,
+        acceptedCount: 0,
+    };
+
     const setState = (key, value) => {
         state[key] = value;
         return state[key];
@@ -57,25 +57,40 @@ export function init() {
 
     const validateGuestName = () => {
         return state.guestName && state.guestName !== '';
-    }
+    };
+
+    const checkPlus1Available = () => {
+        const guestSelect = document.querySelectorAll(`.js-rsvp-select:not(.js-guest-select) input[value$="-yes"]:checked`).length
+        return guestSelect === 1;
+    };
+
+    const checkPlus1Selected = () => {
+        const guestSelect = document.querySelector(guestSelectSelector);
+        if (guestSelect) {
+            return true;
+        }
+        return false;
+    };
+
+    const showPlus1Select = (plus1Available) => {
+        const guestSelect = document.querySelector('.js-guest-select');
+        if (plus1Available) {
+            show(guestSelect);
+        } else {
+            hide(guestSelect);
+            hide(guestName);
+        }
+    };
 
     const checkGuests = () => {
-        const showGuest = false;
         const validState = false;
-        const guestSelect = document.querySelector(guestSelectSelector);
 
-        const all = [...new Set([...rsvpSelects].map((el) => el.name))];
-        const guest = [...new Set([...document.querySelectorAll('.js-guest-select input')].map((el) => el.name))];
-        console.log('guests', guest.length);
-        const filters = all.filter((person) => !guest.includes(person));
-        
-        filters.map((person) => {
-            if(document.querySelector(`input[name="${person}"][value$="-yes"]:checked`)) {
-                showGuest = true;
-            }
-        })
-        
-        if (guestSelect){
+        const plus1Available = checkPlus1Available();
+        const plus1Selected = checkPlus1Selected();
+
+        showPlus1Select(plus1Available);
+
+        if (plus1Selected){
             show(guestName);
             validState = validateGuestName();
         } else {
@@ -83,14 +98,6 @@ export function init() {
             validState = true;
         }
         
-        if (showGuest) {
-            show(document.querySelector('.js-guest-select'));
-        } else {
-            hide(document.querySelector('.js-guest-select'));
-            hide(guestName);
-            validState = true;
-        }
-
         return validState;
     };
 
@@ -99,10 +106,9 @@ export function init() {
         updateCheckedCount();
         updateAcceptedCount();
 
-        console.log(state);
-        
         const validGuests = checkGuests();
         const validRsvps = checkRsvpCount();
+        
         hide(rsvpValidation);
         hide(guestValidation);
         
@@ -135,8 +141,6 @@ export function init() {
                 }
             });
             
-            console.log(selectedCount);
-
             if (state.acceptedCount == 0 && checkRsvpCount()) {
                 hide(mealChoiceHeader);
             } else {
@@ -177,6 +181,12 @@ export function init() {
         show(mealChoiceSection);
     };
 
+    const showFormError = () => {
+        hide(mealValidation);
+        show(rsvpError);
+        confirmButton.innerHTML = confirmButton.dataset.originalText;
+    };
+
     const rsvpSubmit = (event) => {
         event.preventDefault();
     
@@ -204,15 +214,11 @@ export function init() {
                 if (data.success === true && data.type) {
                     window.location.replace(`/${data.inviteCode}/thank-you/${data.type}/`); 
                 } else {
-                    hide(mealValidation);
-                    show(rsvpError);
-                    confirmButton.innerHTML = confirmButton.dataset.originalText;
+                    showFormError();
                 }
             })
             .catch((error) => {
-                hide(mealValidation);
-                show(rsvpError);
-                confirmButton.innerHTML = confirmButton.dataset.originalText;
+                showFormError();
                 console.error(error);
             });
     };
@@ -244,5 +250,4 @@ export function init() {
 
     validateRsvps();
     setEventHandlers();
-
 }
