@@ -1,5 +1,11 @@
 import { hide, show, disable, enable } from '../utils';
 
+const state = {
+    guestCount: 0,
+    checkedCount: 0,
+    acceptedCount: 0,
+};
+
 export function init() {
     const rsvpSelectsSelector = '.js-rsvp-select input';
     const mealSelectSelector = '.js-meal-select input';
@@ -9,7 +15,6 @@ export function init() {
     const mealChoiceSection = document.querySelector('.js-meal-choices');
     const mealChoiceHeader = document.querySelector('.js-meal-choice-header');
     const rsvpSelects = document.querySelectorAll(rsvpSelectsSelector);
-    const rsvpSelectGroups = [...new Set([...rsvpSelects].map((el) => el.name))];
     const mealSelects = document.querySelectorAll(mealSelectSelector);
     const confirmButton = document.querySelector('.js-confirm');
     const rsvpValidation = document.querySelector('.js-validation-1');
@@ -23,13 +28,28 @@ export function init() {
     const guestNameInput = document.querySelector('.js-guest-name-input');
     
     let expectedMealChoices = 0;
-    
+
+    const setState = (key, value) => {
+        state[key] = value;
+        return state;
+    };
+
+    const updateGuestCount = () => {
+        return setState('guestCount', [...new Set([...rsvpSelects].map((el) => el.name))].length);
+    };
+
+    const updateCheckedCount = () => {
+        const checkedRsvps = document.querySelectorAll(`${rsvpSelectsSelector}:checked`);
+        return setState('checkedCount', checkedRsvps.length);
+    };
+
+    const updateAcceptedCount = () => {
+        return setState('acceptedCount', 0);
+    };
+
     const checkRsvps = () => {
-        let selectedCount = 0;
-        rsvpSelectGroups.forEach((select) => {
-            if(document.querySelector(`[name="${select}"]:checked`)) selectedCount++;
-        });
-        return selectedCount == rsvpSelectGroups.length;
+        updateGuestCount();
+        return state.checkedCount == state.guestCount;
     };
 
     const checkGuests = () => {
@@ -37,7 +57,7 @@ export function init() {
         const validState = false;
         const guestSelect = document.querySelector(guestSelectSelector);
 
-        const all = rsvpSelectGroups;
+        const all = [...new Set([...rsvpSelects].map((el) => el.name))];
         const guest = [...new Set([...document.querySelectorAll('.js-guest-select input')].map((el) => el.name))];
         const filters = all.filter((person) => !guest.includes(person));
         
@@ -73,9 +93,11 @@ export function init() {
     };
 
     const validateRsvps = () => {
+        updateCheckedCount();
+        
         const validGuests = checkGuests();
         const validRsvps = checkRsvps();
-
+        
         hide(rsvpValidation);
         hide(guestValidation);
         
@@ -99,7 +121,7 @@ export function init() {
     const checkVisibleMealChoices = () => {
         let acceptCount = 0;
         let selectedCount = 0;
-        rsvpSelectGroups.forEach((select) => {
+        [...new Set([...rsvpSelects].map((el) => el.name))].forEach((select) => {
             document.querySelectorAll(`[name="${select}"]:checked`).forEach((input) => {
                 selectedCount++;
                 if(input.value.includes('yes')) {
@@ -110,13 +132,13 @@ export function init() {
                 }
             });
             
-            if (acceptCount == 0 && (selectedCount == rsvpSelectGroups.length)) {
+            if (acceptCount == 0 && (state.guestCount == state.checkedCount)) {
                 hide(mealChoiceHeader);
             } else {
                 show(mealChoiceHeader);
             }
 
-            if (continuePress === false && acceptCount == 0 && (selectedCount == rsvpSelectGroups.length)) {
+            if (continuePress === false && acceptCount == 0 && (state.guestCount == state.checkedCount)) {
                 hide(continueButton);
                 show(mealChoiceSection);
             } else if (continuePress === false) {
@@ -146,31 +168,13 @@ export function init() {
         }
     }
 
-    // show continue button
-    rsvpSelects.forEach((select) => {
-        select.addEventListener('mousedown', validateRsvps);
-        select.addEventListener('change', validateRsvps);
-    }); 
-
-    guestNameInput.addEventListener('keyup', validateRsvps);
-    guestNameInput.addEventListener('change', validateRsvps);
-
-    // show meal choice section on press of continue button
-    continueButton.addEventListener('click', () => {
+    const continueButtonClick = () => {
         continuePress = true;
         hide(continueButton);
         show(mealChoiceSection);
-    });
+    };
 
-    // show confirm button
-    mealSelects.forEach((select) => {
-        select.addEventListener('mousedown', validateMealChoices);
-        select.addEventListener('change', validateMealChoices);
-    }); 
-
-    validateRsvps();
-
-    rsvpForm.addEventListener('submit', (event) => {
+    const rsvpSubmit = (event) => {
         event.preventDefault();
     
         hide(rsvpError);
@@ -207,6 +211,31 @@ export function init() {
                 confirmButton.innerHTML = originalButtonText;
                 console.error(error);
             });
-    });
+    };
+    
+    const setEventHandlers = () => {
+        // show continue button
+        rsvpSelects.forEach((select) => {
+            select?.addEventListener('mousedown', validateRsvps);
+            select?.addEventListener('change', validateRsvps);
+        }); 
+
+        guestNameInput?.addEventListener('keyup', validateRsvps);
+        guestNameInput?.addEventListener('change', validateRsvps);
+
+        // show meal choice section on press of continue button
+        continueButton?.addEventListener('click', continueButtonClick);
+
+        // show confirm button
+        mealSelects.forEach((select) => {
+            select?.addEventListener('mousedown', validateMealChoices);
+            select?.addEventListener('change', validateMealChoices);
+        }); 
+
+        rsvpForm?.addEventListener('submit', rsvpSubmit);
+    };
+
+    validateRsvps();
+    setEventHandlers();
 
 }
