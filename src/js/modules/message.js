@@ -1,14 +1,15 @@
+import { hide, show } from '../utils';
+
 export function init() {
     const messageForm = document.querySelector('.js-message-form');
     const messageSubmit = document.querySelector('.js-message-submit');
     const messageError = document.querySelector('.js-message-error');
-    const isHidden = "is-hidden";
     const originalButtonText = messageSubmit.innerHTML;
 
     messageForm.addEventListener('submit', (event) => {
         event.preventDefault();
     
-        messageError.classList.add(isHidden);
+        hide(messageError);
         messageSubmit.innerHTML = "Sending...";
 
         const formData = new FormData(messageForm);
@@ -31,12 +32,12 @@ export function init() {
                     console.log('success');
                     window.location.replace(messageForm.action); 
                 } else {
-                    messageError.classList.remove(isHidden);
+                    show(messageError);
                 }
                 messageSubmit.innerHTML = originalButtonText;
             })
             .catch((error) => {
-                messageError.classList.remove(isHidden);
+                show(messageError);
                 messageSubmit.innerHTML = originalButtonText;
                 console.error(error);
             });

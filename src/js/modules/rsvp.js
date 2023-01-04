@@ -21,17 +21,14 @@ export function init() {
     const guestValidation = document.querySelector('.js-validation-2');
     const mealValidation = document.querySelector('.js-validation-3');
     const rsvpError = document.querySelector('.js-rsvp-error');
-    const originalButtonText = confirmButton.innerHTML;
     const continuePress = false;
     const guestSelectSelector = '.js-guest-select input[value$="-yes"]:checked';
     const guestName = document.querySelector('.js-guest-name');
     const guestNameInput = document.querySelector('.js-guest-name-input');
     
-    let expectedMealChoices = 0;
-
     const setState = (key, value) => {
         state[key] = value;
-        return state;
+        return state[key];
     };
 
     const updateGuestCount = () => {
@@ -44,13 +41,23 @@ export function init() {
     };
 
     const updateAcceptedCount = () => {
-        return setState('acceptedCount', 0);
+        const acceptedRsvps = document.querySelectorAll(`${rsvpSelectsSelector}[value$="-yes"]:checked`);
+        return setState('acceptedCount', acceptedRsvps.length);
     };
 
-    const checkRsvps = () => {
-        updateGuestCount();
+    const checkRsvpCount = () => {
         return state.checkedCount == state.guestCount;
     };
+
+    // Set inline text with new guest name
+    const setGuestName = (event) => {
+        document.querySelector(`${guestInlineName}[data-id="${guestNameInput.id}"]`)?.innerHTML = event.target.value;
+        return setState('guestName', event.target.value);
+    };
+
+    const validateGuestName = () => {
+        return state.guestName && state.guestName !== '';
+    }
 
     const checkGuests = () => {
         const showGuest = false;
@@ -59,6 +66,7 @@ export function init() {
 
         const all = [...new Set([...rsvpSelects].map((el) => el.name))];
         const guest = [...new Set([...document.querySelectorAll('.js-guest-select input')].map((el) => el.name))];
+        console.log('guests', guest.length);
         const filters = all.filter((person) => !guest.includes(person));
         
         filters.map((person) => {
@@ -69,13 +77,7 @@ export function init() {
         
         if (guestSelect){
             show(guestName);
-            
-            // Set inline text with new guest name
-            document.querySelector(`${guestInlineName}[data-id="${guestNameInput.id}"]`)?.innerHTML = guestNameInput.value;
-
-            if(guestNameInput.value && guestNameInput.value !== '') {
-                validState = true;
-            }
+            validState = validateGuestName();
         } else {
             hide(guestName);
             validState = true;
@@ -93,11 +95,14 @@ export function init() {
     };
 
     const validateRsvps = () => {
+        updateGuestCount();
         updateCheckedCount();
+        updateAcceptedCount();
+
+        console.log(state);
         
         const validGuests = checkGuests();
-        const validRsvps = checkRsvps();
-        
+        const validRsvps = checkRsvpCount();
         hide(rsvpValidation);
         hide(guestValidation);
         
@@ -119,26 +124,26 @@ export function init() {
     };
 
     const checkVisibleMealChoices = () => {
-        let acceptCount = 0;
         let selectedCount = 0;
         [...new Set([...rsvpSelects].map((el) => el.name))].forEach((select) => {
             document.querySelectorAll(`[name="${select}"]:checked`).forEach((input) => {
                 selectedCount++;
                 if(input.value.includes('yes')) {
                     show(document.querySelector(`.js-meal-${select}`));
-                    acceptCount++;
                 } else {
                     hide(document.querySelector(`.js-meal-${select}`));
                 }
             });
             
-            if (acceptCount == 0 && (state.guestCount == state.checkedCount)) {
+            console.log(selectedCount);
+
+            if (state.acceptedCount == 0 && checkRsvpCount()) {
                 hide(mealChoiceHeader);
             } else {
                 show(mealChoiceHeader);
             }
 
-            if (continuePress === false && acceptCount == 0 && (state.guestCount == state.checkedCount)) {
+            if (continuePress === false && state.acceptedCount == 0 && checkRsvpCount()) {
                 hide(continueButton);
                 show(mealChoiceSection);
             } else if (continuePress === false) {
@@ -147,8 +152,6 @@ export function init() {
             } else if (continuePress) {
                 show(mealChoiceSection);
             }
-
-            expectedMealChoices = acceptCount;
         });
         validateMealChoices();
     }
@@ -162,7 +165,7 @@ export function init() {
             if (document.querySelector(`[name="${select.name.replace('attend', 'meal')}"]:checked`)) selectedCount++;
         });
 
-        if (selectedCount == expectedMealChoices || mealSelects.length === 0) {
+        if (selectedCount == state.acceptedCount || mealSelects.length === 0) {
             enable(confirmButton); 
             hide(mealValidation);
         }
@@ -179,6 +182,7 @@ export function init() {
     
         hide(rsvpError);
 
+        confirmButton.dataset.originalText = confirmButton.innerHTML;
         confirmButton.innerHTML = "Checking...";
 
         const formData = new FormData(rsvpForm);
@@ -202,13 +206,13 @@ export function init() {
                 } else {
                     hide(mealValidation);
                     show(rsvpError);
+                    confirmButton.innerHTML = confirmButton.dataset.originalText;
                 }
-                confirmButton.innerHTML = originalButtonText;
             })
             .catch((error) => {
                 hide(mealValidation);
                 show(rsvpError);
-                confirmButton.innerHTML = originalButtonText;
+                confirmButton.innerHTML = confirmButton.dataset.originalText;
                 console.error(error);
             });
     };
@@ -220,9 +224,12 @@ export function init() {
             select?.addEventListener('change', validateRsvps);
         }); 
 
+        guestNameInput?.addEventListener('keyup', setGuestName);
+        guestNameInput?.addEventListener('change', setGuestName);
+
         guestNameInput?.addEventListener('keyup', validateRsvps);
         guestNameInput?.addEventListener('change', validateRsvps);
-
+        
         // show meal choice section on press of continue button
         continueButton?.addEventListener('click', continueButtonClick);
 

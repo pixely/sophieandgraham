@@ -1,5 +1,6 @@
+import { hide, show, disable, enable } from '../utils';
+
 export function init() {
-    const isHidden = 'is-hidden';
     const loginForm = document.querySelector('.js-login-form');
     const loginInput = document.querySelector('.js-login-code');
     const loginButton = document.querySelector('.js-login-button');
@@ -9,17 +10,17 @@ export function init() {
     const originalButtonText = loginButton.innerHTML;
 
     const resetState = () => {
-        loginForgotten.classList.remove(isHidden);
-        loginNotFound.classList.add(isHidden);
-        loginError.classList.add(isHidden);
+        show(loginForgotten);
+        hide(loginNotFound);
+        hide(loginError);
         loginButton.innerHTML = originalButtonText;
     };
 
     const enableButton = (event) => {
         if (event.target.value && event.target.value.length >= 3) {
-            loginButton.removeAttribute('disabled');
+            enable(loginButton);
         } else {
-            loginButton.setAttribute('disabled', true);
+            disable(loginButton);
         }
     };
 
@@ -43,14 +44,14 @@ export function init() {
                     window.location.replace(`/${data.inviteCode}/`); 
                 } else {
                     resetState();
-                    loginForgotten.classList.add(isHidden);
-                    loginNotFound.classList.remove(isHidden);
+                    hide(loginForgotten);
+                    show(loginNotFound);
                 }
             })
             .catch((error) => {
                 resetState();
-                loginForgotten.classList.add(isHidden);
-                loginError.classList.remove(isHidden);
+                hide(loginForgotten);
+                show(loginError);
                 console.error(error);
             });
     });
