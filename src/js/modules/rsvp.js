@@ -63,8 +63,7 @@ export function init() {
 
     const checkPlus1Available = () => {
         const guestSelect = document.querySelectorAll(`.js-rsvp-select input[value$="-yes"]:checked`).length
-        // const guestSelect = document.querySelectorAll(`.js-rsvp-select:not(.js-guest-select) input[value$="-yes"]:checked`).length
-        return guestSelect === 1;
+        return guestSelect === 1 && guestSelects.length > 0;
     };
 
     const checkPlus1Selected = () => {
@@ -90,14 +89,15 @@ export function init() {
     };
 
     const checkGuests = () => {
-        const validState = false;
-
         const plus1Available = checkPlus1Available();
         const plus1Selected = checkPlus1Selected();
+        const validState = !plus1Available;
 
         showPlus1Select(plus1Available);
         
-        if (plus1Available && plus1Selected){
+        if(!plus1Available) {
+            validState = true;
+        } else if (plus1Available && plus1Selected === true){
             show(guestName);
             validState = validateGuestName();
             if (!validState) show(guestValidation);
@@ -121,7 +121,7 @@ export function init() {
 
         const validRsvps = checkRsvpCount();
         const validGuests = checkGuests();
-        
+
         if (validGuests && validRsvps) {
             enable(continueButton);
         } else {
