@@ -145,7 +145,7 @@
 
               </fieldset>
 
-              <fieldset class="form__fieldset">
+              <fieldset class="form__fieldset{% if person['Plus1'] == true %} js-guest-meal-select{% endif %}">
 
                 {% if invite['Invite Type'] == 'Evening' %}
                   <div class="form__fieldset-title">

@@ -16,10 +16,11 @@ export function init() {
     const mealValidation = document.querySelector('.js-validation-3');
     const rsvpError = document.querySelector('.js-rsvp-error');
     const continuePress = false;
-    const guestSelectSelector = '.js-guest-select input[value$="-yes"]:checked';
+    const guestSelectSelector = '.js-guest-select input:checked';
     const guestName = document.querySelector('.js-guest-name');
     const guestNameInput = document.querySelector('.js-guest-name-input');
-    const guestSelects = document.querySelectorAll('.js-guest-select');
+    const guestSelects = document.querySelectorAll('.js-guest-select input');
+    const guestMealSelects = document.querySelector('.js-guest-meal-select');
 
     const state = {
         guestCount: 0,
@@ -68,19 +69,23 @@ export function init() {
 
     const checkPlus1Selected = () => {
         const guestSelect = document.querySelector(guestSelectSelector);
-        if (guestSelect) {
+        if (guestSelect?.value?.includes('-yes')) {
             return true;
+        } else if (guestSelect?.value?.includes('-no')) {
+            return false;
         }
-        return false;
+        return null;
     };
 
     const showPlus1Select = (plus1Available) => {
         const guestSelect = document.querySelector('.js-guest-select');
         if (plus1Available) {
             show(guestSelect);
+            show(guestMealSelects);
         } else {
             hide(guestSelect);
             hide(guestName);
+            hide(guestMealSelects);         
         }
     };
 
@@ -91,13 +96,16 @@ export function init() {
         const plus1Selected = checkPlus1Selected();
 
         showPlus1Select(plus1Available);
-
-        if (plus1Selected){
+        
+        if (plus1Available && plus1Selected){
             show(guestName);
             validState = validateGuestName();
-        } else {
+            if (!validState) show(guestValidation);
+        } else if (plus1Selected === false) {
             hide(guestName);
             validState = true;
+        } else {
+            hide(guestName);
         }
         
         return validState;
@@ -108,18 +116,18 @@ export function init() {
         updateCheckedCount();
         updateAcceptedCount();
 
-        const validGuests = checkGuests();
-        const validRsvps = checkRsvpCount();
-        
         hide(rsvpValidation);
         hide(guestValidation);
+
+        const validRsvps = checkRsvpCount();
+        const validGuests = checkGuests();
         
         if (validGuests && validRsvps) {
             enable(continueButton);
         } else {
             disable(continueButton);
             if(!validGuests) {
-                show(guestValidation);
+                // show(guestValidation);
             } else {
                 show(rsvpValidation);
             }
@@ -133,13 +141,12 @@ export function init() {
 
     const checkVisibleMealChoices = () => {
         let selectedCount = 0;
-        [...new Set([...rsvpSelects].map((el) => el.name))].forEach((select) => {
+        [...new Set([...rsvpSelects, ...guestSelects].map((el) => el.name))].forEach((select) => {
+            hide(document.querySelector(`.js-meal-${select}`));
             document.querySelectorAll(`[name="${select}"]:checked`).forEach((input) => {
                 selectedCount++;
                 if(input.value.includes('yes')) {
                     show(document.querySelector(`.js-meal-${select}`));
-                } else {
-                    hide(document.querySelector(`.js-meal-${select}`));
                 }
             });
             
