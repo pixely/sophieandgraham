@@ -19,6 +19,7 @@ export function init() {
     const guestSelectSelector = '.js-guest-select input[value$="-yes"]:checked';
     const guestName = document.querySelector('.js-guest-name');
     const guestNameInput = document.querySelector('.js-guest-name-input');
+    const guestSelects = document.querySelectorAll('.js-guest-select');
 
     const state = {
         guestCount: 0,
@@ -60,7 +61,8 @@ export function init() {
     };
 
     const checkPlus1Available = () => {
-        const guestSelect = document.querySelectorAll(`.js-rsvp-select:not(.js-guest-select) input[value$="-yes"]:checked`).length
+        const guestSelect = document.querySelectorAll(`.js-rsvp-select input[value$="-yes"]:checked`).length
+        // const guestSelect = document.querySelectorAll(`.js-rsvp-select:not(.js-guest-select) input[value$="-yes"]:checked`).length
         return guestSelect === 1;
     };
 
@@ -226,6 +228,11 @@ export function init() {
     const setEventHandlers = () => {
         // show continue button
         rsvpSelects.forEach((select) => {
+            select?.addEventListener('mousedown', validateRsvps);
+            select?.addEventListener('change', validateRsvps);
+        }); 
+
+        guestSelects?.forEach((select) => {
             select?.addEventListener('mousedown', validateRsvps);
             select?.addEventListener('change', validateRsvps);
         }); 
