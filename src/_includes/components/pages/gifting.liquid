@@ -10,9 +10,58 @@
 
         <div class="text-content text-content--centered">
             
-            <p>//todo</p>
+            <h3 class="heading-3">Intro copy about our honeymoon</h3>
+
+            <div class="gifts">
+                {% for gift in gifts %}
+                    {% render "components/molecules/gift-card" gift: gift %}
+                {% endfor %}
+            </div>
+
+
+            <p>Or contribute a gift value of your choice that we can use towards a special moment</p>
+
+            <div class="text-content__cta">
+                {% capture monzoUrl %}https://monzo.me/grahammartin4/?d={{ "Sophie & Graham Wedding" | url_encode }}{% endcapture %}
+                {% render "components/atoms/call-to-action"
+                    url: monzoUrl
+                    text: "Make a contribution"
+                    target: "_blank"
+                %}
+            </div>
 
         </div>
+
+        <div class="page__header">
+            <h2 class="heading-2">FAQs</h2>
+        </div>
+
+        <details class="expand text-s">
+            <summary class="expand__summary">Can I do a bank transfer?</summary>
+            <div class="expand__contents">
+            <p>Sed aliquam tortor elit, quis rhoncus velit rutrum quis. Integer justo felis, ultrices imperdiet massa venenatis, varius vehicula urna. Nam porttitor magna nulla, ut consequat lectus malesuada a. Aliquam diam odio, semper at varius sed, molestie nec ligula. Sed tristique malesuada velit a ultricies. Etiam sagittis libero non purus iaculis lacinia. Donec tristique, mi nec rutrum venenatis, magna sapien aliquam leo, sed iaculis ex ipsum ac dolor.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">How do I pay with PayPal?</summary>
+            <div class="expand__contents">
+            <p>Sed aliquam tortor elit, quis rhoncus velit rutrum quis. Integer justo felis, ultrices imperdiet massa venenatis, varius vehicula urna. Nam porttitor magna nulla, ut consequat lectus malesuada a. Aliquam diam odio, semper at varius sed, molestie nec ligula. Sed tristique malesuada velit a ultricies. Etiam sagittis libero non purus iaculis lacinia. Donec tristique, mi nec rutrum venenatis, magna sapien aliquam leo, sed iaculis ex ipsum ac dolor.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">How do I pay with Monzo?</summary>
+            <div class="expand__contents">
+            <p>Sed aliquam tortor elit, quis rhoncus velit rutrum quis. Integer justo felis, ultrices imperdiet massa venenatis, varius vehicula urna. Nam porttitor magna nulla, ut consequat lectus malesuada a. Aliquam diam odio, semper at varius sed, molestie nec ligula. Sed tristique malesuada velit a ultricies. Etiam sagittis libero non purus iaculis lacinia. Donec tristique, mi nec rutrum venenatis, magna sapien aliquam leo, sed iaculis ex ipsum ac dolor.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">How do I pay with a debit card?</summary>
+            <div class="expand__contents">
+            <p>Sed aliquam tortor elit, quis rhoncus velit rutrum quis. Integer justo felis, ultrices imperdiet massa venenatis, varius vehicula urna. Nam porttitor magna nulla, ut consequat lectus malesuada a. Aliquam diam odio, semper at varius sed, molestie nec ligula. Sed tristique malesuada velit a ultricies. Etiam sagittis libero non purus iaculis lacinia. Donec tristique, mi nec rutrum venenatis, magna sapien aliquam leo, sed iaculis ex ipsum ac dolor.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">Alternative payment methods</summary>
+            <div class="expand__contents">
+            <p>Sed aliquam tortor elit, quis rhoncus velit rutrum quis. Integer justo felis, ultrices imperdiet massa venenatis, varius vehicula urna. Nam porttitor magna nulla, ut consequat lectus malesuada a. Aliquam diam odio, semper at varius sed, molestie nec ligula. Sed tristique malesuada velit a ultricies. Etiam sagittis libero non purus iaculis lacinia. Donec tristique, mi nec rutrum venenatis, magna sapien aliquam leo, sed iaculis ex ipsum ac dolor.</p>
+        </details>
+        
     </div>
 
 {% endblock %}

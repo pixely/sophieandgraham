@@ -1,0 +1,42 @@
+{% comment %} {{ gift | json }} {% endcomment %}
+
+{% assign sizes = "210px" %}
+{% assign widths = "210,420,630,840" %}
+
+<div class="gift-card">
+
+    <div class="gift-card__image">
+        {% render "components/atoms/image-hex", 
+            url: "./src/assets/images/sophie-graham.jpg",
+            alt: "Graham & Sophie walking in Oxford",
+            sizes: sizes,
+            widths: widths 
+        %}
+    </div>
+
+    <div class="gift-card__details">
+        <h3 class="heading-5">{{ gift['Name'] }}</h3>
+        {% if gift['Value'] %}
+            <h4 class="heading-6">&pound;{{ gift['Value'] }}</h4>
+        {% endif %}
+        {% if gift['Unlimited'] != true and gift['Quantity'] > 0 %}
+            <p>{{ gift['Quantity Available'] }} / {{ gift['Quantity'] }} available</p>
+        {% endif %}
+    </div>
+
+    <div class="gift-card__cta">
+        {% if gift['Available'] == true or gift['Quantity Available'] > 0 %}
+            {% render "components/atoms/button",
+                type: "button",
+                text: "Select Gift",
+            %}
+            <a href="">Contribute towards gift</a>
+        {% else %}
+            {% render "components/atoms/button",
+                type: "button",
+                text: "Sold Out",
+                disabled: true
+            %}
+        {% endif %}
+    </div>
+</div>

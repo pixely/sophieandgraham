@@ -17,7 +17,7 @@
     width: 100%;
     outline: none;
     text-align: center;
-    
+
     &:hover {
         color: white;
         background: $color-primary;
@@ -37,6 +37,15 @@
             background: $color-primary-dark;
             border-color: $color-primary-dark;
         }
+    }
+
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
+        cursor: default;
+        color: $color-text;
+        background: rgba($color-primary, .2);
+        border: none;
     }
 
 }
