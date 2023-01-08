@@ -9,6 +9,19 @@
     width: 100%;
     color: $color-text;
     font-size: 1rem;
+    text-align: left;
+
+    &--number {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+    };
+
+    &__hidden-input {
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        background: transparent;
+    };
 
     &::placeholder {
         color: $color-grey-medium;

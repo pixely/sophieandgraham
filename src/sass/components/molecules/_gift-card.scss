@@ -22,14 +22,25 @@
 
     &__cta {
         display: grid;
+        grid-auto-flow: row;
         grid-gap: $spacing-s;
+    }
+
+    &__options {
+        display: grid;
+        grid-gap: $spacing-s;
+        width: 100%;
+    }
+
+    &__faq-link {
+        font-size: 0.65rem;
     }
 }
 
 @media (min-width: 790px) {
     .gift-card {
         grid-template-columns: 1fr 4fr;
-        grid-template-rows: repeat(3, max-content);
+        grid-template-rows: repeat(2, max-content);
 
         &__image {
             grid-column: 1;
@@ -44,8 +55,14 @@
         }
 
         &__cta {
+            grid-template-columns: 1fr max-content;
             grid-auto-flow: column;
             align-items: center;
+        }
+
+        &__options {
+            grid-row: 2;
+            grid-column: 1 / span 2;
         }
     }
 }

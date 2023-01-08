@@ -3,7 +3,7 @@
 {% assign sizes = "210px" %}
 {% assign widths = "210,420,630,840" %}
 
-<div class="gift-card">
+<div class="gift-card js-gift" data-gift="{{ gift.id }}" data-gift-name="{{ gift['Name'] }}" data-gift-value="{{ gift['Value'] }}">
 
     <div class="gift-card__image">
         {% render "components/atoms/image-hex", 
@@ -29,8 +29,29 @@
             {% render "components/atoms/button",
                 type: "button",
                 text: "Select Gift",
+                class: "js-gift-select"
             %}
-            <a href="">Contribute towards gift</a>
+            <a href="javascript:;" class="js-gift-contribute">Contribute towards gift</a>
+            <div class="gift-card__options js-gift-options is-hidden">
+                {% render "components/atoms/pound-input",
+                    name: "invite_code",
+                    placeholder: gift['Value'],
+                    class: "js-gift-value is-hidden"
+                %} 
+                {% for payment in payments %}
+                    {% capture paymentValue = %}&pound;{{ gift['Value']}} {% endcapture %}
+                    {% capture paymentOriginalText %}{{ payment['Button Text'] }}<small>({{ payment['Button Small Text'] }})</small>{% endcapture %}
+                    {% assign paymentText = paymentOriginalText | replace: "#P", paymentValue %}
+                    {% render "components/atoms/call-to-action",
+                        class: 'js-gift-payment is-hidden',
+                        url: payment['URL'],
+                        text: paymentText,
+                        target: "_blank"
+                        dataOriginal: paymentOriginalText,
+                    %}
+                {% endfor %}
+                <p class="gift-card__faq-link">See <a href="#faq">FAQs</a> for more details on alternative payment options</p>
+            </div>
         {% else %}
             {% render "components/atoms/button",
                 type: "button",

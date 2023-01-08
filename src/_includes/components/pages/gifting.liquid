@@ -12,28 +12,31 @@
             
             <h3 class="heading-3">Intro copy about our honeymoon</h3>
 
-            <div class="gifts">
+            <div class="gifts" data-module="gifting">
                 {% for gift in gifts %}
-                    {% render "components/molecules/gift-card" gift: gift %}
+                    {% render "components/molecules/gift-card" gift: gift, payments: payments %}
                 {% endfor %}
             </div>
 
-
             <p>Or contribute a gift value of your choice that we can use towards a special moment</p>
 
-            <div class="text-content__cta">
-                {% capture monzoUrl %}https://monzo.me/grahammartin4/?d={{ "Sophie & Graham Wedding" | url_encode }}{% endcapture %}
-                {% render "components/atoms/call-to-action"
-                    url: monzoUrl
-                    text: "Make a contribution"
-                    target: "_blank"
-                %}
-            </div>
-
+            {% for payment in payments %}
+                {% assign paymentName = "Sophie & Graham Wedding" | url_encode %}
+                {% capture paymentOriginalText %}Contribute with {{ payment['Name'] }}<small>({{ payment['Button Small Text'] }})</small>{% endcapture %}
+                {% assign paymentText = paymentOriginalText | replace: "#P", ""  | replace: "#D", paymentName %}
+                <div class="text-content__cta">
+                    {% render "components/atoms/call-to-action",
+                        url: payment['URL'],
+                        text: paymentText,
+                        target: "_blank"
+                        dataOriginal: paymentOriginalText,
+                    %}
+                </div>
+            {% endfor %}
         </div>
 
         <div class="page__header">
-            <h2 class="heading-2">FAQs</h2>
+            <h2 id="faq" class="heading-2">FAQs</h2>
         </div>
 
         <details class="expand text-s">

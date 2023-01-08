@@ -25,3 +25,9 @@ if (dynamicModules.includes('message')) {
         message.init();
     });
 }
+
+if (dynamicModules.includes('gifting')) {
+    import("./modules/gifting").then(function (gifting) {
+        gifting.init();
+    });
+}
