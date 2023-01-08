@@ -6,9 +6,10 @@
 <div class="gift-card js-gift" data-gift="{{ gift.id }}" data-gift-name="{{ gift['Name'] }}" data-gift-value="{{ gift['Value'] }}">
 
     <div class="gift-card__image">
+        {% capture imageUrl %}./src/assets/images/{{ gift['Image Name'] }}{% endcapture %}
         {% render "components/atoms/image-hex", 
-            url: "./src/assets/images/sophie-graham.jpg",
-            alt: "Graham & Sophie walking in Oxford",
+            url: imageUrl,
+            alt: gift['Name'],
             sizes: sizes,
             widths: widths 
         %}
