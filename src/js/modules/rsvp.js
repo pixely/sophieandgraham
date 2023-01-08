@@ -196,6 +196,10 @@ export function init() {
         confirmButton.innerHTML = confirmButton.dataset.originalText;
     };
 
+    const setSuccessCookie = (inviteCode) => {
+        document.cookie = `saved=${inviteCode}; SameSite=None; Secure; max-age=3600; path=/`;
+    };
+    
     const rsvpSubmit = (event) => {
         event.preventDefault();
     
@@ -221,6 +225,7 @@ export function init() {
             .then((data) => {
                 console.log(data);
                 if (data.success === true && data.type) {
+                    setSuccessCookie(data.inviteCode);
                     window.location.replace(`/${data.inviteCode}/thank-you/${data.type}/`); 
                 } else {
                     showFormError();

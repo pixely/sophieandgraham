@@ -25,14 +25,38 @@
                 {%- endfor -%}
             </h3>
 
-            <div class="invite-header__cta">
-                {% render "components/atoms/call-to-action-primary"
-                    url: rsvp_url
-                    text: "RSVP"
-                %}
-            </div>
+            {% if invite['within_deadline'] == true %}
+                {% if invite['Status'] == "Saved" or invite['Status'] == "Saved & Updated" %}
+                    <div class="invite-header__cta">
+                        {% render "components/atoms/call-to-action-primary"
+                            url: rsvp_url
+                            text: "Update your RSVP"
+                        %}
+                    </div>
 
-            <h2 class="heading-4">Please RSVP by the {{ invite.formatted_deadline }}</h2>
+                    <h2 class="heading-4">You can update your RSVP until {{ invite.formatted_deadline }}</h2>
+                
+                {% else %}
+
+                    <div class="invite-header__cta">
+                        {% render "components/atoms/call-to-action-primary"
+                            url: rsvp_url
+                            text: "RSVP"
+                            class: "js-rsvp"
+                        %}
+                    </div>
+
+                    <h2 class="heading-4 js-rsvp-text" data-alt="You can update your RSVP until {{ invite.formatted_deadline }}">Please RSVP by the {{ invite.formatted_deadline }}</h2>
+                {% endif %}
+            {% else %}
+                <div class="invite-header__cta">
+                    {% if invite['Status'] == "Saved" or invite['Status'] == "Saved & Updated" %}
+                        <h2 class="heading-4">Thank you for submitting your RSVP. Please <a href="/contact">send us a message</a> if you need to make any changes</h2>
+                    {% else %}
+                        <h2 class="heading-4">Sorry you have missed the RSVP deadline, but <a href="/contact">send us a message</a> and we'll see what we can do</h2>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% else %}
             <div class="invite-header__cta">
                 {% render "components/atoms/call-to-action-primary"

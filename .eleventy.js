@@ -1,5 +1,4 @@
-// const { EleventyEdgePlugin } = require("@11ty/eleventy");
-const tinyHTML = require('@sardine/eleventy-plugin-tinyhtml');
+// const tinyHTML = require('@sardine/eleventy-plugin-tinyhtml');
 const Image = require("@11ty/eleventy-img");
 const { readFileSync } = require('fs');
 
@@ -33,7 +32,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/assets/favicons": "/" });
 
-  eleventyConfig.addPlugin(tinyHTML);
+  // eleventyConfig.addPlugin(tinyHTML);
   
   async function imageShortcode(src, alt, sizes = "100vw", widths = "300,600", className = '') {
     if(alt === undefined) {

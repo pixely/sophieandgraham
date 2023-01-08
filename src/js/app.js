@@ -31,3 +31,16 @@ if (dynamicModules.includes('gifting')) {
         gifting.init();
     });
 }
+
+if (dynamicModules.includes('check-saved')) {
+    const cookieValue = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('saved='))
+        ?.split('=')[1];
+    if (document.querySelector(`[data-id="${cookieValue}"]`)) {
+        const rsvpButton = document.querySelector('.js-rsvp');
+        const rsvpText = document.querySelector('.js-rsvp-text');
+        rsvpButton?.innerHTML = "Update your RSVP";
+        rsvpText?.innerHTML = rsvpText.dataset?.alt;
+    }
+}

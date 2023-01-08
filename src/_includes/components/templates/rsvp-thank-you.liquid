@@ -1,7 +1,7 @@
 {% layout 'components/templates/default' %}
 
 {% block content %}
-  <form class="form js-message-form" action="/{{ invite['Invite Code'] }}/" data-module="message">
+  <form class="form js-message-form" action="/{{ invite['Invite Code'] }}/rsvp/complete" data-module="message">
     <input type="hidden" name="invite" value="{{ invite.id }}" />
     <input type="hidden" name="form-name" value="thank-you" />
     <div class="form__title">

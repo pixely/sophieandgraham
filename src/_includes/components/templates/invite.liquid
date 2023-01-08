@@ -8,9 +8,9 @@
 
 {% block content %}
 
-<div class="overview">
+<div class="overview" data-module="check-saved" data-id="{{ invite['Invite Code'] }}">
 
-  {% render "components/organisms/invite-header" invite: invite %}
+  {% render "components/organisms/invite-header" invite: invite %}  
 
   {% render "components/atoms/section-break" %}
 

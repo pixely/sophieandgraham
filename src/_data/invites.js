@@ -8,7 +8,6 @@ module.exports = async function () {
     const inviteList = await airtableData("Invite List").select({
       view: "Grid view",
     }).all();
-    const invites = [];
 
     const finalList = await Promise.all(inviteList.map(async (record) => {
       let inviteGuests = [];
@@ -17,40 +16,17 @@ module.exports = async function () {
         
         newGuestArray = await guestArray.map(async guest => { 
           const a = await airtableData("Guest List").find(guest);
-          // console.log('a', a);
           return {
             "id": a._rawJson.id,
             ...a._rawJson.fields,
           }
         });
 
-        // console.log('point a');
         inviteGuests = await Promise.all(newGuestArray);
-        // inviteGuests = newGuestArray;
-        // console.log('point b', inviteGuests);
-        // console.log('point c', newGuestArray);
-
-        // await Promise.all(record._rawJson.fields.Invitees.map(async (guest) => {
-        //   console.log('guest', guest);
-        //   if (!guest) return;
-
-        //   console.log('a');
-        //   const guestRecord = await airtableData("Guest List").find(guest);
-        //   inviteGuests.push(guestRecord._rawJson.fields);
-        //   console.log(inviteGuests);
-        //     // , (err, record) => {
-        //     //   if (err) { console.error(err); return; }
-        //     //   console.log('raw', record._rawJson.fields);
-        //     //   ;
-        //     //   return record._rawJson.fields;
-        //     // });
-        //     // console.log('b');
-        // }));
       }
-      // console.log(inviteGuests);
       
       const deadline = DateTime.fromISO(record._rawJson.fields['Deadline']);
-      
+
       const getNumberSuffix = (num) => {
         const th = 'th'
         const rd = 'rd'
@@ -69,19 +45,13 @@ module.exports = async function () {
         }
       }
 
-      invites.push({
-          "id": record._rawJson.id,
-          ...record._rawJson.fields,
-          "invitees": inviteGuests,
-          formatted_deadline: `${deadline.toFormat('d')}${getNumberSuffix(deadline.toFormat('d'))} ${deadline.toFormat('MMMM')}`,
-        });
-      
       return {
           "id": record._rawJson.id,
           ...record._rawJson.fields,
           "people": inviteGuests,
           formatted_deadline: `${deadline.toFormat('d')}${getNumberSuffix(deadline.toFormat('d'))} ${deadline.toFormat('MMMM')}`,
           formatted_deadline_with_year: `${deadline.toFormat('d')}${getNumberSuffix(deadline.toFormat('d'))} ${deadline.toFormat('MMMM yyyy')}`,
+          within_deadline: DateTime.now() <= deadline.endOf('day'),
         };
       }
     ));
