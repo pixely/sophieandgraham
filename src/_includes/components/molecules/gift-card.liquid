@@ -1,7 +1,7 @@
 {% comment %} {{ gift | json }} {% endcomment %}
 
-{% assign sizes = "210px" %}
-{% assign widths = "210,420,630,840" %}
+{% assign sizes = "(min-width: 790px) 86px, 138px" %}
+{% assign widths = "86,139,172,278,414" %}
 
 <div class="gift-card js-gift" data-gift="{{ gift.id }}" data-gift-name="{{ gift['Name'] }}" data-gift-value="{{ gift['Value'] }}">
 
