@@ -12,7 +12,9 @@ const handler = async (event) => {
     let updatedRecords = 0;
 
     const retrieveFromParams = (guestId, paramKey) => {
-      return params[`${guestId}-${paramKey}`]?.replace(`${guestId}-`,'');
+      const param = params[`${guestId}-${paramKey}`]?.replace(`${guestId}-`,'');
+      
+      return typeof param === 'string' && param?.length === 0 ? null : param; 
     };
 
     const arrayIfThere = (param) => {
@@ -23,26 +25,33 @@ const handler = async (event) => {
     };
 
     const formatGuestUpdate = (guests) => {
-      return guests.map((guest) => ({
-          id: guest,
-          fields: {
-            "Attending": retrieveFromParams(guest, "attend"),
-            "Menu Choice": arrayIfThere(retrieveFromParams(guest, "meal")),
-            "Dietary Requirements": retrieveFromParams(guest, "dietary"),
-            "Name": retrieveFromParams(guest, "name"),
-          },
-        })
-      );
+      return guests.map((guest) => {
+        let name = {};
+        const nameParam = retrieveFromParams(guest, "name");
+        if (nameParam?.length > 0) {
+          name['Name'] = nameParam;
+        };
+
+        return {
+            id: guest,
+            fields: {
+              "Attending": retrieveFromParams(guest, "attend"),
+              "Menu Choice": arrayIfThere(retrieveFromParams(guest, "meal")),
+              "Dietary Requirements": retrieveFromParams(guest, "dietary"),
+              ...name,
+            },
+          };
+      });
     };
 
     const rsvpType = (guests) => {
       let attend = 0;
       let decline = 0;
       let type = 'mixed';
-
+    
       guests.forEach((guest) => {
           const attending = retrieveFromParams(guest, "attend");
-          if (attending == 'yes') {
+          if (attending == 'yes' || retrieveFromParams(guest, "name") === null) {
             attend++;
           } else if (attending == 'no') {
             decline++;

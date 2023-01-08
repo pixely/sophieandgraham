@@ -209,8 +209,11 @@ export function init() {
         confirmButton.innerHTML = "Checking...";
 
         const formData = new FormData(rsvpForm);
+        
+
         const plainFormData = Object.fromEntries(formData.entries());
-    
+        console.log(plainFormData);
+
         const fetchOptions = {
             method: 'POST',
             headers: {
