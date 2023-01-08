@@ -1,0 +1,43 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+  <form class="form js-message-form" action="/" data-module="message">
+    <input type="hidden" name="form-name" value="contact" />
+    <div class="form__title">
+      <h1 class="heading-2">Contact</h1>
+    </div>
+    <div class="form__subtitle">
+      <h2 class="heading-4">Please use the form below to send us a message</h2>
+    </div>
+      <div class="form__section">
+          <fieldset class="form__fieldset">
+            <div class="form__field">
+                <label class="form__label" for="name">Your name</label> 
+                {% render "components/atoms/text-input", 
+                    name: "name",
+                %}
+            </div>
+            <div class="form__field">
+                <label class="form__label" for="email">Your email address</label> 
+                {% render "components/atoms/text-input", 
+                    name: "email",
+                %}
+            </div>
+            <div class="form__field">
+                <label class="form__label" for="message">Your message</label>
+                {% render "components/atoms/textarea", 
+                    name: "message", 
+                %}
+            </div>
+          </fieldset>
+      </div>
+
+      {% render "components/atoms/button", text: "Send to Sophie &amp; Graham" class: "js-message-submit" %}
+
+      <div class="form__validation js-message-error is-hidden">
+        <h3 class="heading-4">Uh oh, something went wrong</h3>
+      </div>
+
+  </form>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+.call-to-action {
+    appearance: none;
+    -webkit-appearance: none;
+    color: $color-primary-dark;
+    background: transparent;
+    padding: 20px;
+    border-radius: 30px;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 0.9rem;
+    align-items: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background .3s linear, color .3s linear, border .3s linear;
+    border: 2px solid $color-primary;
+    display: block;
+    width: 100%;
+    outline: none;
+    text-align: center;
+
+    small {
+        display: block;
+        font-size: .7rem;
+        margin-top: $spacing-xs;
+        font-style: italic;
+        font-weight: $font-weight-light;
+        text-transform: none;
+    }
+
+    &:hover {
+        color: white;
+        background: $color-primary;
+        cursor: pointer;
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 0px 2px $color-highlights;
+    }
+
+    &--primary {
+        color: $color-background;
+        background: $color-primary;
+        border-color: $color-primary;
+    
+        &:hover {
+            background: $color-primary-dark;
+            border-color: $color-primary-dark;
+        }
+    }
+
+    &--disabled,
+    &--disabled:hover,
+    &--disabled:focus {
+        cursor: default;
+        color: $color-text;
+        background: rgba($color-primary, .2);
+        border: none;
+    }
+
+}

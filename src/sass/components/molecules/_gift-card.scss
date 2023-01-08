@@ -1,0 +1,68 @@
+.gift-card {
+    border: 1px solid $color-grey-medium;
+    border-radius: 4px;
+    padding: $spacing-m $spacing-s $spacing-s;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: $spacing-s;
+
+    &__image {
+        grid-column: 2;
+    }
+
+    &__details,
+    &__cta {
+        grid-column: 1 / -1;    
+    }
+
+    &__details {
+        display: grid;
+        grid-gap: $spacing-xs;
+    }
+
+    &__cta {
+        display: grid;
+        grid-auto-flow: row;
+        grid-gap: $spacing-s;
+    }
+
+    &__options {
+        display: grid;
+        grid-gap: $spacing-s;
+        width: 100%;
+    }
+
+    &__faq-link {
+        font-size: 0.65rem;
+    }
+}
+
+@media (min-width: 790px) {
+    .gift-card {
+        grid-template-columns: 1fr 4fr;
+        grid-template-rows: repeat(2, max-content);
+
+        &__image {
+            grid-column: 1;
+            grid-row: 1 / -1;
+        }
+
+        &__details,
+        &__cta {
+            grid-column: 2 / -1;  
+            justify-self: left;  
+            justify-items: left;
+        }
+
+        &__cta {
+            grid-template-columns: 1fr max-content;
+            grid-auto-flow: column;
+            align-items: center;
+        }
+
+        &__options {
+            grid-row: 2;
+            grid-column: 1 / span 2;
+        }
+    }
+}

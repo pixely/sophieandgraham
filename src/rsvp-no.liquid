@@ -1,0 +1,12 @@
+---
+pagination:
+    data: invites
+    size: 1
+    alias: invite
+private: true
+eleventyExcludeFromCollections: true
+type: no
+message: We're sorry you're unable to celebrate our special day with us
+layout: 'components/templates/rsvp-thank-you.liquid'
+permalink: '/{{ invite["Invite Code"] }}/thank-you/no/'
+---

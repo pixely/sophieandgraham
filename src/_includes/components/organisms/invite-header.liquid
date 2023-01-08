@@ -1,0 +1,81 @@
+{% capture rsvp_url %}/{{ invite['Invite Code'] }}/rsvp/{% endcapture %}
+
+{% assign sizes = "210px" %}
+{% assign widths = "210,420,630,840" %}
+
+<div class="invite-header">
+
+    <div class="invite-header__title">
+        {% render "components/molecules/hero-heading" %}
+    </div>
+
+    <div class="invite-header__date">
+        <h2 class="invite-header__date-prefix heading-4">are getting married</h2>
+        {% include "components/molecules/wedding-date" %}
+    </div>
+
+    <div class="invite-header__rsvp">
+        {% if invite %}
+            <h3 class="heading-2">Hi 
+                {% for person in invite.people %}
+                    {% if forloop.last and forloop.length > 1 %} &amp; {% endif %}
+                        {{- person['Name'] -}}
+                    {% if forloop.last == false and forloop.rindex > 2 %}, {% endif %}
+                    {%- if forloop.last and forloop.length > 1 -%}!{%- endif -%}
+                {%- endfor -%}
+            </h3>
+
+            {% if invite['within_deadline'] == true %}
+                {% if invite['Status'] == "Saved" or invite['Status'] == "Saved & Updated" %}
+                    <div class="invite-header__cta">
+                        {% render "components/atoms/call-to-action-primary"
+                            url: rsvp_url
+                            text: "Update your RSVP"
+                        %}
+                    </div>
+
+                    <h2 class="heading-4">You can update your RSVP until {{ invite.formatted_deadline }}</h2>
+                
+                {% else %}
+
+                    <div class="invite-header__cta">
+                        {% render "components/atoms/call-to-action-primary"
+                            url: rsvp_url
+                            text: "RSVP"
+                            class: "js-rsvp"
+                        %}
+                    </div>
+
+                    <h2 class="heading-4 js-rsvp-text" data-alt="You can update your RSVP until {{ invite.formatted_deadline }}">Please RSVP by the {{ invite.formatted_deadline }}</h2>
+                {% endif %}
+            {% else %}
+                <div class="invite-header__cta">
+                    {% if invite['Status'] == "Saved" or invite['Status'] == "Saved & Updated" %}
+                        <h2 class="heading-4">Thank you for submitting your RSVP. Please <a href="/contact">send us a message</a> if you need to make any changes</h2>
+                    {% else %}
+                        <h2 class="heading-4">Sorry you have missed the RSVP deadline, but <a href="/contact">send us a message</a> and we'll see what we can do</h2>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="invite-header__cta">
+                {% render "components/atoms/call-to-action-primary"
+                    url: "/rsvp/"
+                    text: "RSVP &amp; Details"
+                %}
+            </div>
+
+            <h2 class="heading-4">Enter the code on your invite to see the details of the day and RSVP</h2>
+
+            <div class="invite-header__teaser">
+                {% render "components/atoms/image-hex", 
+                    url: "./src/assets/images/sophie-graham.jpg",
+                    alt: "Graham & Sophie walking in Oxford",
+                    sizes: sizes,
+                    widths: widths 
+                %}
+            </div>
+        {% endif %}
+    </div>
+
+</div>

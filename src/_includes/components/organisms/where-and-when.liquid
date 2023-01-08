@@ -1,0 +1,30 @@
+<div class="text-content text-content--centered">
+    
+    <h3 class="icon-text icon-text--location heading-4">
+        <a href="/transport-and-accomodation">Stratton Court Barn, Stratton Audley, Bicester, OX27 9AJ</a>
+    </h3>
+
+    <h3 class="icon-text icon-text--date heading-4">
+        Saturday 6th May 2023
+    </h3>
+    
+    <h3 class="icon-text icon-text--time heading-4">
+        {% if inviteType == "Day" %}
+        12.30PM arrival for the ceremony at 1PM
+        {% endif %}
+        {% if inviteType == "Evening" %} 
+        6:30PM arrival for first dance &amp; party at 7PM
+        {% endif %}
+    </h3>
+
+    <div class="text-content__cta">
+        {% render "components/molecules/countdown" %}
+    </div>
+    
+    <div class="text-content__cta">
+        {% render "components/atoms/call-to-action"
+            url: "/calendar.ics"
+            text: "Add to calendar"
+        %}
+    </div>
+</div>

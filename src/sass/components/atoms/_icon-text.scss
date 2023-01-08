@@ -1,0 +1,28 @@
+.icon-text {
+    padding-bottom: $spacing-s;
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        height: $spacing-s;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-bottom: $spacing-xs;
+    }
+    &--location:before {
+        background-image: url(data-url:../assets/svgs/icons/location.svg);
+    }
+
+    &--date:before {
+        background-image: url(data-url:../assets/svgs/icons/calendar.svg);
+    }
+
+    &--time:before {
+        background-image: url(data-url:../assets/svgs/icons/time.svg);
+    }
+}

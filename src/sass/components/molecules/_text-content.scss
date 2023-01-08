@@ -1,0 +1,28 @@
+.text-content {
+    padding: 0 $spacing-s;
+    line-height: 1.25;
+
+    > *:not(:last-child) {
+        margin-bottom: $spacing-s;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul li {
+        width: fit-content;
+        display: list-item;
+        margin: 0 auto;
+        list-style: none;
+    }
+
+    &--centered {
+        text-align: center;
+    }
+
+    &__cta {
+        margin-top: $spacing-m;
+    }
+}

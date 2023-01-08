@@ -103,3 +103,7 @@ dist
 # TernJS port file
 .tern-port
 _site/
+.parcel-cache
+
+# Local Netlify folder
+.netlify

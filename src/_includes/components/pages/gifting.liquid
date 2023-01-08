@@ -1,0 +1,70 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+
+    <div class="page">
+
+        <div class="page__header">
+            <h2 class="heading-2">Gifting</h2>
+        </div>
+
+        <div class="text-content text-content--centered">
+            
+            <p>Your presence at our special day is all that we wish for. However, if you would like to give a gift, we will be very grateful for any contributions towards our honeymoon. We are still planning our perfect escape and are in the process of making a wish list of activities that we'd love to experience together which you can also contribute towards. We'll be updating this list soon.</p>
+
+            <div class="gifts" data-module="gifting">
+                {% for gift in gifts %}
+                    {% render "components/molecules/gift-card" gift: gift, payments: payments %}
+                {% endfor %}
+            </div>
+
+            <p>Or contribute a gift value of your choice that we can use towards a special moment</p>
+
+            {% for payment in payments %}
+                {% assign paymentName = "Sophie & Graham Wedding" | url_encode %}
+                {% capture paymentOriginalText %}Contribute with {{ payment['Name'] }}<small>({{ payment['Button Small Text'] }})</small>{% endcapture %}
+                {% assign paymentText = paymentOriginalText | replace: "#P", ""  | replace: "#D", paymentName %}
+                <div class="text-content__cta">
+                    {% render "components/atoms/call-to-action",
+                        url: payment['URL'],
+                        text: paymentText,
+                        target: "_blank"
+                        dataOriginal: paymentOriginalText,
+                    %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="page__header">
+            <h2 id="faq" class="heading-2">FAQs</h2>
+        </div>
+
+        <details class="expand text-s">
+            <summary class="expand__summary">Can I do a bank transfer?</summary>
+            <div class="expand__contents">
+            <p>Yes of course, if you'd prefer to do a bank transfer, please <a href="/contact">contact us</a> and we'll send you our bank details.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">How do I pay with PayPal?</summary>
+            <div class="expand__contents">
+            <p>If you've got a PayPal account you can transfer money directly from your PayPal account using the PayPal links above.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">How do I pay with Monzo?</summary>
+            <div class="expand__contents">
+            <p>If you've got a Monzo account you can transfer money directly from your Monzo account using the Monzo links above on the same phone that's using the Monzo app – it will take you straight into Monzo.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">How do I pay with a debit card?</summary>
+            <div class="expand__contents">
+            <p>Monzo allows you to pay using a debit card without needing an account as long as it is a payment of no more than &pound;100.</p>
+        </details>
+        <details class="expand text-s">
+            <summary class="expand__summary">Alternative payment methods</summary>
+            <div class="expand__contents">
+            <p>Our preference would be to receive gifts via the secure payment methods of PayPal or Monzo. However, if you'd prefer another method that's totally fine. You can <a href="/contact">contact us</a> to get our bank details for a bank transfer, or alternatively you can give us cash or a cheque - please make any cheques out to Graham Martin.</p>
+        </details>
+        
+    </div>
+
+{% endblock %}

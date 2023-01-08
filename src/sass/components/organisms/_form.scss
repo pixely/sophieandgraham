@@ -1,0 +1,48 @@
+.form {
+    padding-top: $spacing-xl;
+
+    &__title {
+        text-align: center;
+        margin-bottom: $spacing-m;
+    }
+
+    &__subtitle {
+        text-align: center;
+        margin-bottom: $spacing-l;
+    }
+
+    &__section {
+        margin-bottom: $spacing-l;
+    }
+
+    &__fieldset {
+        padding: 0;
+        border: none;
+        margin: 0 0 $spacing-m;
+    }
+
+    &__fieldset-title {
+        text-align: center;
+        margin-bottom: $spacing-s;
+    }
+
+    &__field{
+        display: block;
+        margin: 0 0 $spacing-s;
+    }
+
+    &__validation {
+        text-align: center;
+        opacity: 0.9;
+        margin-top: $spacing-s;
+        font-size: 0.8rem;
+    }
+
+    &__label {
+        display: inline-block;
+        margin-bottom: $spacing-xs;
+        padding-left: $spacing-s;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+    }
+}

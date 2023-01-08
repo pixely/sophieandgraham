@@ -1,0 +1,98 @@
+.checkbox {
+    &__input {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        clip: rect(0 0 0 0); 
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap; 
+        width: 1px;
+    }
+
+    &__label-container {
+        display: grid;
+        grid-template-columns: min-content 1fr min-content;
+        grid-auto-flow: column;
+        grid-gap: 12px;
+        align-items: center;
+        background: transparent;
+        border: 2px solid $color-grey-medium;
+        outline: 1px solid transparent;
+        border-radius: 30px;
+        padding: 12px;
+        line-height: 1;
+        position: relative;
+        transition: all 0.2s linear;
+        box-shadow: 0px 0px 0px 1px transparent;
+
+        &:before {
+            content: '';
+            display: block;
+            height: 24px;
+            width: 24px;
+            background: $color-grey-light;
+            border: 1px solid $color-grey-medium;
+            border-radius: 24px;
+            grid-column: 1;
+            background-size: 0px;
+            background-image: url(data-url:../assets/svgs/icons/tick.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            transition-property: border, background-color, background-size;
+            transition-duration: 0.2s, 0.2s, 0.4s;
+            transition-timing-function: linear, linear, cubic-bezier(.17,.67,.76,1.6);
+            transition-delay: 0, 0, 0.1;
+        }
+
+        &:hover {
+            cursor: pointer;
+            border-color: $color-grey-dark;
+        }    
+    }
+
+    &__label {
+        grid-column: 2;
+        line-height: 1.25;
+        display: grid;
+        align-self: center;
+        font-weight: $font-weight-regular;
+        padding-bottom: 4px;
+    
+
+        &--uppercase {
+            text-transform: uppercase;
+        }
+    }   
+
+    .checkbox__input:focus + .checkbox__label-container {
+        box-shadow: 0px 0px 0px 2px $color-highlights;
+    }
+
+    .checkbox__input:checked + .checkbox__label-container {
+        border-color: $color-primary;
+        margin: 0;
+        box-shadow: 0px 0px 0px 1px $color-highlights;
+
+        &:hover {
+            border-color: $color-primary-dark;
+            box-shadow: 0px 0px 0px 1px $color-primary-dark;
+        }
+
+        &:hover:before {
+            background-size: 14px;
+        }
+
+        &:before {
+            background-color: $color-primary;
+            background-size: 12px;
+            border-color: $color-primary-dark;
+        }
+    }
+
+    .checkbox__input:checked:focus {
+        box-shadow: 0px 0px 0px 2px $color-highlights;
+    }
+}

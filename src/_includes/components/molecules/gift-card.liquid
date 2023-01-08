@@ -1,0 +1,64 @@
+{% comment %} {{ gift | json }} {% endcomment %}
+
+{% assign sizes = "(min-width: 790px) 86px, 138px" %}
+{% assign widths = "86,139,172,278,414" %}
+
+<div class="gift-card js-gift" data-gift="{{ gift.id }}" data-gift-name="{{ gift['Name'] }}" data-gift-value="{{ gift['Value'] }}">
+
+    <div class="gift-card__image">
+        {% capture imageUrl %}./src/assets/images/{{ gift['Image Name'] }}{% endcapture %}
+        {% render "components/atoms/image-hex", 
+            url: imageUrl,
+            alt: gift['Name'],
+            sizes: sizes,
+            widths: widths 
+        %}
+    </div>
+
+    <div class="gift-card__details">
+        <h3 class="heading-5">{{ gift['Name'] }}</h3>
+        {% if gift['Value'] %}
+            <h4 class="heading-6">&pound;{{ gift['Value'] }}</h4>
+        {% endif %}
+        {% if gift['Unlimited'] != true and gift['Quantity'] > 0 %}
+            <p>{{ gift['Quantity Available'] }} / {{ gift['Quantity'] }} available</p>
+        {% endif %}
+    </div>
+
+    <div class="gift-card__cta">
+        {% if gift['Available'] == true or gift['Quantity Available'] > 0 %}
+            {% render "components/atoms/button",
+                type: "button",
+                text: "Select Gift",
+                class: "js-gift-select"
+            %}
+            <a href="javascript:;" class="js-gift-contribute">Contribute towards gift</a>
+            <div class="gift-card__options js-gift-options is-hidden">
+                {% render "components/atoms/pound-input",
+                    name: "invite_code",
+                    placeholder: gift['Value'],
+                    class: "js-gift-value is-hidden"
+                %} 
+                {% for payment in payments %}
+                    {% capture paymentValue = %}&pound;{{ gift['Value']}} {% endcapture %}
+                    {% capture paymentOriginalText %}{{ payment['Button Text'] }}<small>({{ payment['Button Small Text'] }})</small>{% endcapture %}
+                    {% assign paymentText = paymentOriginalText | replace: "#P", paymentValue %}
+                    {% render "components/atoms/call-to-action",
+                        class: 'js-gift-payment is-hidden',
+                        url: payment['URL'],
+                        text: paymentText,
+                        target: "_blank"
+                        dataOriginal: paymentOriginalText,
+                    %}
+                {% endfor %}
+                <p class="gift-card__faq-link">See <a href="#faq">FAQs</a> for more details on alternative payment options</p>
+            </div>
+        {% else %}
+            {% render "components/atoms/button",
+                type: "button",
+                text: "Sold Out",
+                disabled: true
+            %}
+        {% endif %}
+    </div>
+</div>

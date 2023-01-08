@@ -1,55 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> 
-  <title>{{ site.title }}</title>
-  <meta name="title" content="{{ site.title }}">
-  <meta name="description" content="{{ site.description }}">
+{% layout 'components/templates/default' %}
 
-  <link rel="shortcut icon" type="image/svg+xml" href="{{ site.icons.svg }}">
-  <link rel="alternate icon" href="{{ site.icons.ico }}">
-  <link rel="apple-touch-icon" href="{{ site.icons.apple }}">
-  <link rel="mask-icon" href="{{ site.icons.maskIcon }}" color="{{ site.manifest.colours.theme }}">
+{% block content %}
 
-  <link rel="manifest" href="/manifest.json">
-  
-  <meta name="application-name" content="{{ site.title }}">
-  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
-  <meta name="theme-color" content="{{ site.manifest.colours.theme }}">
-  
-  <link rel="canonical" href="https://www.sophieandgraham.co.uk/">
-  <link rel="stylesheet" href="/css/app.css">
-  <link rel="stylesheet" href="https://use.typekit.net/ujn0mau.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GX8C8JXWM6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-GX8C8JXWM6');
-  </script>
-</head>
+    <div class="page">
+        <div class="page__header">
+            {% include "components/molecules/hero-heading" %}
+        </div>
 
-<body>
-  <main class="teaser">
-    <div class="teaser__title">
-      <h1 class="hero-heading">
-        <span class="hero-heading__name">Sophie</span>
-        <span class="hero-heading__amp">&amp;</span>
-        <span class="hero-heading__name">Graham</span>
+        <div class="text-content text-content--centered">
+            <h3 class="heading-2">Sorry, Page not found</h3>
+        </div>
     </div>
-    <div class="teaser__married">
-      <h2 class="address heading-3">
-        Sorry, Page not found
-      </h2>
-    </div>
-  </main>
-  <picture class="footer-image">
-    <source srcset="/assets/foliage-l.svg" media="(min-width: 1200px)" />
-    <source srcset="/assets/foliage-m.svg" media="(min-width: 900px)" />
-    <source srcset="/assets/foliage-s.svg" media="(min-width: 700px)" />
-    <img src="/assets/foliage-xs.svg" alt="" loading="lazy" decoding="async" />
-  </picture>
-  <div class="footer-fade"></div>
-</body>
-</html>
+
+{% endblock %}

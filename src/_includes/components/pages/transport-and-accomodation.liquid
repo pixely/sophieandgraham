@@ -1,0 +1,79 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+
+    <div class="page">
+
+        <div class="page__header">
+            <h2 class="heading-2">Transport and Accomodation</h2>
+        </div>
+
+        <div class="text-content text-content--centered">
+            
+
+            <h3 class="heading-3">Transport</h3>
+
+            <p>Stratton Court Barn is located just a few miles north of Bicester in Oxfordshire.</p>
+
+            <p class="heading-4">Stratton Court Barn, Stratton Audley, Bicester, OX27 9AJ</p>
+
+            <p>There is free parking on-site and you're welcome to leave your car overnight so long as it's collected by 11AM the next day.</p>
+
+            <p>If you plan to use a taxi service booking in advance is essential as our venue is located in the countryside. We recommend booking as far in advance as possible.</p>
+
+            <p>Below are some recommended local taxi services:</p>
+
+            <ul>
+                <li>Alpha Cars Bicester: <a href="tel:01869252525">01869 252525</a></li>
+                <li>Star Cars Bicester: <a href="tel:01869252526">01869 252526</a></li>
+                <li>Lux Cars Bicester: <a href="tel:01869323247">01869 323247</a></li>
+            </ul>
+
+            {% render "components/atoms/section-break" %}
+
+            <h3 class="heading-3">Directions</h3>
+
+            <p>Satnav Postcode: <strong>OX27 9AJ</strong></p>
+
+            <p>From Junction 9, M40: Proceed through Bicester on A4421 towards Buckingham. Ignore the first two turnings towards Stratton Audley. Take the next right, signposted "Poundon" and "Godington". At the first crossroads, approximately 3/4 mile away, signposted "Chetwode" and "Gawcott", turn left. Pool Farm, Stratton Court Barn, is the first turning on your right.</p>
+
+            {% render "components/atoms/call-to-action"
+                url: "https://www.google.com/maps/dir//Stratton+Court+Barn,+Stratton+Audley,+Bicester+OX27+9AJ/@51.9411631,-1.0980986,18z/data=!4m9!4m8!1m0!1m5!1m1!1s0x4876e12f94efe947:0x4d7361acc4a052dc!2m2!1d-1.0976035!2d51.9413757!3e0?hl=en"
+                text: "Directions on Google Maps"
+            %}
+
+            <p>Please not that this venue is NOT Stratton Audley Barn. Please do not follow signs for this venue, and instead make sure you arrive at Stratton <em>Court</em> Barn.</p>
+
+            {% render "components/atoms/section-break" %}
+            
+            <h3 class="heading-3">Accomodation</h3>
+
+            <p>There is plenty of accomodation in the local area including the suggestions below:</p>
+
+            <p>Budget</p>
+            
+            <ul>
+                <li><a target="_blank" href="https://www.travelodge.co.uk/hotels/603/Bicester-hotel">Travelodge Bicester</a></li>
+                <li><a target="_blank" href="https://www.premierinn.com/gb/en/hotels/england/oxfordshire/bicester/bicester.html">Premier Inn Bicester</a></li>
+                <li><a target="_blank" href="https://www.ihg.com/holidayinnexpress/hotels/gb/en/bicester/oxfbr/hoteldetail">Holiday Inn Express Bicester</a></li>
+            </ul>
+
+            <p>Bed &amp; Breakfast &amp; Guesthouses</p>
+
+            <ul>
+                <li><a target="_blank" href="https://www.hvfarm.co.uk/">Hillview Farm, Poundon</a></li>
+                <li><a target="_blank" href="https://www.manorfarmpoundon.co.uk/">Manor Farm, Poundon</a></li>
+                <li><a target="_blank" href="https://www.airbnb.co.uk/s/Stratton-Audley--United-Kingdom/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&price_filter_input_type=0&price_filter_num_nights=5&query=Stratton%20Audley%2C%20United%20Kingdom&place_id=ChIJebvuBSvhdkgRthnemLLYMa4&date_picker_type=flexible_dates&flexible_trip_lengths%5B%5D=weekend_trip&source=structured_search_input_header&search_type=autocomplete_click">Airbnb</a></li>
+            </ul>
+
+            <p>Mid &amp; Upmarket Hotels</p>
+
+            <ul>
+                <li><a target="_blank" href="https://www.bicesterhotelgolfandspa.com/">Bicester Hotel Golf & Spa</a></li>
+                <li><a target="_blank" href="https://www.thechestertonhotel.com/">The Chesterton Hotel</a></li>
+                <li><a target="_blank" href="https://fivearrowshotel.co.uk/">The Five Arrows, Waddesdon</a></li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

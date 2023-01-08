@@ -1,0 +1,15 @@
+.countdown {
+    font-weight: $font-weight-light;
+    font-size: 2.5rem;
+    visibility: hidden;
+    
+    &.is-visible {
+        visibility: visible;
+    }
+
+    &__days {
+        display: block;
+        line-height: 1;
+        margin-bottom: -1.5rem;
+    }
+}

@@ -1,0 +1,113 @@
+<details class="expand text-s">
+    <summary class="expand__summary">Directions to the venue</summary>
+    <div class="expand__contents">
+        <p>Satnav Postcode: <strong>OX27 9AJ</strong></p>
+
+        <p><a href="https://www.google.com/maps/dir//Stratton+Court+Barn,+Stratton+Audley,+Bicester+OX27+9AJ/@51.9411631,-1.0980986,18z/data=!4m9!4m8!1m0!1m5!1m1!1s0x4876e12f94efe947:0x4d7361acc4a052dc!2m2!1d-1.0976035!2d51.9413757!3e0?hl=en" target="_blank">Directions on Google Maps</a></p>
+
+        <p>From Junction 9, M40: Proceed through Bicester on A4421 towards Buckingham. Ignore the first two turnings towards Stratton Audley. Take the next right, signposted "Poundon" and "Godington". At the first crossroads, approximately 3/4 mile away, signposted "Chetwode" and "Gawcott", turn left. Pool Farm, Stratton Court Barn, is the first turning on your right.</p>
+
+        <p>Please not that this venue is NOT Stratton Audley Barn. Please do not follow signs for this venue, and instead make sure you arrive at Stratton <em>Court</em> Barn.</p>
+
+        <p>See <a href="/transport-and-accomodation/">transport &amp; accomodation</a> for full details.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Can I leave my car overnight?</summary>
+    <div class="expand__contents">
+    <p>Yes, cars are welcome to be left overnight as long as they're collected by 11am the following day.</p>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Can I bring my child?</summary>
+    <div class="expand__contents">
+        <p>No, sorry but this is a child free celebration. As much as we love all of your children, it is a small venue and we are unable to accommodate them. Please arrange appropriate childcare and we hope this allows you to let your hair down and have a night off!</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Can I take photos?</summary>
+    <div class="expand__contents">
+        <p>Please refrain from taking photos during the ceremony. After this, please take as many photos as you like! Just make sure you don't get in the way of the official photographers.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Can I post on social media?</summary>
+    <div class="expand__contents">
+        <p>Please don’t post any pictures or videos on social media until after the bride and groom have done so. Please use the hashtag #THEMARTINS2023.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">What's the dress code?</summary>
+    <div class="expand__contents">
+        <p>Dress to impress. For example, a short or long dress for ladies and a suit, shirt and tie for the men.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">When do I need to RSVP by?</summary>
+    <div class="expand__contents">
+        <p>Please <a href="/{{ invite['Invite Code'] }}/rsvp/">RSVP here</a> using the form on our website by the {{ invite.formatted_deadline_with_year }}.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">Can I bring a plus one?</summary>
+    <div class="expand__contents">
+        <p>No sorry, only those named on your invite can be accommodated as it is a small venue and we are limited on numbers.</p>
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">What time should I arrive?</summary>
+    <div class="expand__contents">
+        {% if invite['Invite Type'] == "Day" %}
+            <p>Please arrive between 12-12.30pm, the ceremony will begin at 1pm.</p>
+        {% elsif invite['Invite Type'] == "Evening" %}
+            <p>Please arrive from 6.30pm, our first dance will be shortly after.</p>
+        {% endif %}
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">What time does the wedding finish?</summary>
+    <div class="expand__contents">
+        <p>Music stops at 11.30pm and you'll need to be off the premises by midnight.</p>
+    </div>
+</details>
+
+{% if invite['Invite Type'] == "Day" %}
+    <details class="expand text-s">
+        <summary class="expand__summary">Where are the ceremony and reception taking place?</summary>
+        <div class="expand__contents">
+            <p>Both the ceremony and reception will be held at Stratton Court Barn, Stratton Audley, Bicester OX27 9AJ.</p>
+        </div>
+    </details>
+{% endif %}
+
+<details class="expand text-s">
+    <summary class="expand__summary">
+     {% if invite['Invite Type'] == "Day" %}
+            <p>Will the wedding be indoors or outdoors?</p>
+        {% elsif invite['Invite Type'] == "Evening" %}
+            <p>Will the reception be indoors or outdoors?</p>
+        {% endif %}    
+    </summary>
+    <div class="expand__contents">
+        {% if invite['Invite Type'] == "Day" %}
+            <p>The ceremony will be held indoors but weather permitting parts of the day will be spent outside.</p>
+        {% elsif invite['Invite Type'] == "Evening" %}
+            <p>Weather permitting it'll be both indoors and outdoors.</p>
+        {% endif %}
+    </div>
+</details>
+
+<details class="expand text-s">
+    <summary class="expand__summary">I've got a question that hasn't been answered&hellip;</summary>
+    <div class="expand__contents">
+        <p>Not to worry, just pop us a message on our <a href="/contact">contact page</a> and we'll get back to you ASAP.</p>
+    </div>
+</details>

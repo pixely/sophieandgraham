@@ -1,0 +1,9 @@
+<a 
+    class="call-to-action {{ class }} {% if primary == true %} call-to-action--primary{% endif %}{% if disabled %} call-to-action--disabled{% endif %}" 
+    href="{{ url }}"
+    target="{{ target }}"
+    data-original="{{ dataOriginal }}"
+    {% if disabled %}disabled="disabled"{% endif %}
+    >
+    {{ text}}
+</a>

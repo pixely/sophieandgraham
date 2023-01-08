@@ -1,6 +1,7 @@
 html { font-size: 18px } /*20px*/
 
 body {
+  color: $color-text;
   font-family: $font-body-family;
   font-size: $font-body-size;
   line-height: $font-body-line-height;
@@ -36,6 +37,7 @@ h1,
 
 h2,
 .heading-2 {
+  color: $color-highlights;
   font-family: $font-h2-family;
   font-size: $font-h2-size;
   line-height: $font-h2-line-height;
@@ -56,6 +58,7 @@ h3,
 
 h4,
 .heading-4 {
+  color: $color-text;
   font-family: $font-h4-family;
   font-size: $font-h4-size;
   line-height: $font-h4-line-height;
@@ -66,7 +69,7 @@ h4,
 
 h5,
 .heading-5 {
-  color: $color-highlights;
+  color: $color-text;
   font-family: $font-h5-family;
   font-size: $font-h5-size;
   line-height: $font-h5-line-height;
@@ -99,8 +102,17 @@ small,
   text-transform: $font-body-s-transform;
 }
 
+a {
+  color: $color-primary-dark;
+  transform: color .2s linear;
+
+  &:hover {
+    color: darken($color-primary-dark, 20%);
+  }
+}
+
 @media (min-width: 576px) {
   
-  html { font-size: 26px }
+  // html { font-size: 26px }
 
 }

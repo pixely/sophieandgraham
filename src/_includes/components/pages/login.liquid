@@ -1,0 +1,40 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+  <form class="form js-login-form" data-module="login">
+    <div class="form__title">
+      <h1 class="heading-2">Login</h1>
+    </div>
+    <div class="form__subtitle">
+      <h2 class="heading-4">Please enter the code on your invitation to get started</h2>
+    </div>
+      <div class="form__section">
+          <fieldset class="form__fieldset">
+            {% render "components/atoms/text-input", 
+              name: "invite_code", 
+              placeholder: "e.g. AB1",
+              class: "js-login-code"
+            %}
+          </fieldset>
+      </div>
+
+      {% render "components/atoms/button", text: "Get started", class: "js-login-button", disabled: true %}
+
+      <div class="form__validation js-login-forgotten">
+        <p>Your invite code is included on your invite, for example sophieandgraham.co.uk/AB1. If you can't find your code, or can't login with it, just <a href="/contact">let us know</a>.</p>
+    
+      </div>
+
+      <div class="form__validation js-login-not-found is-hidden">
+        <h3 class="heading-4">Uh oh, we couldn't find your invite</h3>
+        <p>Please try again, or <a href="/contact">contact us</a> if you still can't login</p>
+      </div>
+
+      <div class="form__validation js-login-error is-hidden">
+        <h3 class="heading-4">Uh oh, something went wrong</h3>
+        <p>Please try again, or <a href="/contact">contact us</a> if you still can't login</p>
+      </div>
+
+  </form>
+
+{% endblock %}

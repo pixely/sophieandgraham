@@ -1,0 +1,49 @@
+.expand {
+    border-top: 1px solid $color-grey-medium;
+    
+    &:last-of-type {
+        border-bottom: 1px solid $color-grey-medium;
+    }
+
+    &__summary {
+        text-transform: uppercase;
+        padding: $spacing-s $spacing-s $spacing-s 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        &::marker,
+        &::-webkit-details-marker {
+            display: none;
+            content: '';
+        }     
+        
+        &:after {
+            background-image: url(data-url:../assets/svgs/icons/chevron-down.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            display: block;
+            content: '';
+            height: 12px;
+            width: 12px;
+            transition: transform 0.3s ease-in-out;
+        }
+    }
+
+    &__contents {
+        padding-bottom: $spacing-s;
+        text-transform: none;
+
+        *:not(:last-child) {
+            margin-bottom: $spacing-s;
+        }
+    }
+
+    &[open] {
+        
+        .expand__summary:after {
+            transform: rotateX(-180deg);
+        }
+    }
+}

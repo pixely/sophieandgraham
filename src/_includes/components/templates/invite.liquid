@@ -1,0 +1,128 @@
+{% layout 'components/templates/default' %}
+
+{% assign sizes = "(min-width: 2000px) 500px, (min-width: 720px) 25vw, 180px" %}
+{% assign widths = "180,360,540,720,1000,1500" %}
+
+{% assign sizes = "210px" %}
+{% assign widths = "210,420,630,840" %}
+
+{% block content %}
+
+<div class="overview" data-module="check-saved" data-id="{{ invite['Invite Code'] }}">
+
+  {% render "components/organisms/invite-header" invite: invite %}  
+
+  {% render "components/atoms/section-break" %}
+
+  <!-- WHERE & WHEN -->
+  <div class="overview__section">
+    <div class="overview__section-image">
+      {% render "components/atoms/image-hex", 
+          url: "./src/assets/images/stratton-court-barn-1.jpg", 
+          alt: "Courtyard at Stratton Court Barn our wedding venue"
+          sizes: sizes,
+          widths: widths,
+      %}
+    </div>
+    <div class="overview__section-title">
+      <h2 class="heading-2">Where & When</h2>
+    </div>
+    <div class="overview__section-content">
+      {% render "components/organisms/where-and-when" inviteType: invite['Invite Type'] %}
+    </div>
+  </div>
+
+  {% render "components/atoms/section-break" %}
+
+  <!-- ORDER OF THE DAY -->
+  <div class="overview__section">
+    <div class="overview__section-image">
+        {% render "components/atoms/image-hex", 
+          url: "./src/assets/images/stratton-court-barn-3.jpg", 
+          alt: "Courtyard at Stratton Court Barn our wedding venue"
+          sizes: sizes,
+          widths: widths
+        %}
+    </div>
+    <div class="overview__section-title">
+      <h2 class="heading-2">Order of the {{ invite['Invite Type'] }}</h2>
+    </div>
+    <div class="overview__section-content">
+      {% render "components/organisms/order-of-the-day" inviteType: invite['Invite Type'] %}
+    </div>
+  </div>
+
+  {% render "components/atoms/section-break" %}
+
+  <!-- OUR STORY -->
+  <div class="overview__section">
+    <div class="overview__section-image">
+      {% render "components/atoms/image-hex", 
+        url: "./src/assets/images/sophie-graham.jpg",
+        alt: "Graham & Sophie walking in Oxford",
+        sizes: sizes,
+        widths: widths 
+      %}
+    </div>
+    <div class="overview__section-title">
+      <h2 class="heading-2">Our Story</h2>
+    </div>
+    <div class="overview__section-content">
+      {% render "components/organisms/our-story" %}
+    </div>
+  </div>
+
+  {% render "components/atoms/section-break" %}
+
+  <!-- TRANSPORT & ACCOMODATION -->
+  <div class="overview__section">
+    <div class="overview__section-image">
+      {% render "components/atoms/image-hex", 
+        url: "./src/assets/images/sophie-graham-alt.jpg",
+        alt: "Graham & Sophie sitting in Oxford",
+        sizes: sizes,
+        widths: widths 
+      %}
+    </div>
+    <div class="overview__section-title">
+      <h2 class="heading-2">Transport & Accomodation</h2>
+    </div>
+    <div class="overview__section-content">
+      {% render "components/organisms/transport-and-accomodation" %}
+    </div>
+  </div>
+
+  {% render "components/atoms/section-break" %}
+
+  <!-- GIFTING -->
+  <div class="overview__section">
+    <div class="overview__section-image">
+      {% render "components/atoms/image-hex", 
+        url: "./src/assets/images/sophie-graham-3.png",
+        alt: "Sophie & Graham in Oxford",
+        sizes: sizes,
+        widths: widths 
+      %}
+    </div>
+    <div class="overview__section-title">
+      <h2 class="heading-2">Gifting</h2>
+    </div>
+    <div class="overview__section-content">
+      {% render "components/organisms/gifting" %}
+    </div>
+  </div>
+
+  {% render "components/atoms/section-break" %}
+
+  <!-- FAQ -->
+  <div class="overview__section">
+    <div class="overview__section-title">
+      <h2 class="heading-2">FAQs</h2>
+    </div>
+    <div class="overview__section-content">
+      {% render "components/organisms/faq" invite: invite %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

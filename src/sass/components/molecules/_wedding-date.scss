@@ -1,0 +1,38 @@
+.wedding-date {
+    text-transform: uppercase;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-items: stretch;
+    line-height: 1;
+    font-weight: $font-weight-regular;
+
+    &__end {
+        border-top: $highlights-width solid $color-highlights;
+        border-bottom: $highlights-width solid $color-highlights;
+        padding: 10px 8px 12px;
+        display: grid;
+        align-content: center;
+    }
+
+    &__middle {
+        font-size: 2em;
+        padding: 0 16px;
+        align-self: center;
+        display: grid;
+        align-content: center;
+        align-self: center;
+        grid-template-columns: auto auto;
+        font-weight: $font-weight-light;
+        position: relative;
+        top: -0.2rem;
+        gap: 2px;
+    }
+
+    sub {
+        font-size: 0.7rem;
+        font-weight: $font-weight-regular;
+        display: grid;
+        align-self: center;
+    }
+}
