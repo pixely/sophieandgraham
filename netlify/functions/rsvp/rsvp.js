@@ -45,22 +45,27 @@ const handler = async (event) => {
     };
 
     const rsvpType = (guests) => {
+      let count = guests.length;
       let attend = 0;
       let decline = 0;
       let type = 'mixed';
-    
+
       guests.forEach((guest) => {
           const attending = retrieveFromParams(guest, "attend");
-          if (attending == 'yes' || retrieveFromParams(guest, "name") === null) {
+          if (attending == 'yes') {
             attend++;
           } else if (attending == 'no') {
             decline++;
           }
+
+          if (retrieveFromParams(guest, "name") === null) {
+            count--;
+          };
         });
 
-      if(attend == guests.length) {
+      if(attend == count) {
         type = 'yes';
-      } else if (decline == guests.length) {
+      } else if (decline == count) {
         type = 'no';
       }
 
