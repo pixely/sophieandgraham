@@ -53,7 +53,8 @@ const giftContributeSelect = (event) => {
 
     const gift = event.target.closest(giftParentSelector);
     const giftName = gift.dataset.giftName;
-    const inputValue = new Intl.NumberFormat("en", numberFormatOptions).format(gift.querySelector(giftValueSelector)?.value || minValue);
+    const giftValue = new Intl.NumberFormat("en", numberFormatOptions).format(gift.dataset.giftValue || minValue);
+    const inputValue = new Intl.NumberFormat("en", numberFormatOptions).format(gift.querySelector(giftValueSelector)?.value || giftValue);
     
     showGiftingOptions(gift, giftName, inputValue, true);
 }

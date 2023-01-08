@@ -23,8 +23,9 @@
         background: transparent;
     };
 
-    &::placeholder {
-        color: $color-grey-medium;
+    &::placeholder,
+    &__hidden-input::placeholder {
+        color: rgba($color-grey-medium, .7);
     }
 
     &:hover { 
