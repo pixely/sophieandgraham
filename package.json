@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/pixely/sophieandgraham#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0",
+    "@11ty/eleventy": "^2.0.1",
     "@parcel/optimizer-data-url": "^2.8.3",
     "@parcel/packager-raw-url": "^2.8.3",
     "@parcel/transformer-inline-string": "^2.8.3",
