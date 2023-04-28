@@ -27,10 +27,11 @@
 
     <div class="gift-card__cta">
         {% if gift['Available'] == true or gift['Quantity Available'] > 0 %}
+            {% capture className = %}js-gift-select do-{{ gift['Display Order']}} i-{{ gift['id']}}{% endcapture %}
             {% render "components/atoms/button",
                 type: "button",
                 text: "Select Gift",
-                class: "js-gift-select"
+                class: className
             %}
             <a href="javascript:;" class="js-gift-contribute">Contribute towards gift</a>
             <div class="gift-card__options js-gift-options is-hidden">
@@ -42,9 +43,10 @@
                 {% for payment in payments %}
                     {% capture paymentValue = %}&pound;{{ gift['Value']}} {% endcapture %}
                     {% capture paymentOriginalText %}{{ payment['Button Text'] }}<small>({{ payment['Button Small Text'] }})</small>{% endcapture %}
+                    {% capture paymentClassName = %}js-gift-payment is-hidden do-{{ gift['Display Order']}} i-{{ gift['id']}}{% endcapture %}
                     {% assign paymentText = paymentOriginalText | replace: "#P", paymentValue %}
                     {% render "components/atoms/call-to-action",
-                        class: 'js-gift-payment is-hidden',
+                        class: paymentClassName,
                         url: payment['URL'],
                         text: paymentText,
                         target: "_blank"
