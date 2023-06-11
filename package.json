@@ -25,16 +25,16 @@
   "homepage": "https://github.com/pixely/sophieandgraham#readme",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
-    "@parcel/optimizer-data-url": "^2.8.3",
-    "@parcel/packager-raw-url": "^2.9.1",
-    "@parcel/transformer-inline-string": "^2.8.3",
-    "@parcel/transformer-sass": "^2.8.3",
-    "@parcel/transformer-webmanifest": "^2.9.1",
+    "@parcel/optimizer-data-url": "^2.9.2",
+    "@parcel/packager-raw-url": "^2.9.2",
+    "@parcel/transformer-inline-string": "^2.9.2",
+    "@parcel/transformer-sass": "^2.9.2",
+    "@parcel/transformer-webmanifest": "^2.9.2",
     "airtable": "^0.12.1",
     "dotenv": "^16.1.4",
     "npm-run-all": "^4.1.5",
-    "parcel": "^2.8.3",
-    "sass": "^1.62.1"
+    "parcel": "^2.9.2",
+    "sass": "^1.63.3"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^3.1.0",
