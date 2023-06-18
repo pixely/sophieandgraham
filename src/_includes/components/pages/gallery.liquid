@@ -1,0 +1,57 @@
+{% layout 'components/templates/default' %}
+
+{% block content %}
+
+    {% capture rsvp_url %}/{{ invite['Invite Code'] }}/rsvp/{% endcapture %}
+
+    {% assign sizes = "210px" %}
+    {% assign widths = "210,420,630,840" %}
+
+<div class="invite-header">
+
+    <div class="invite-header__title">
+        {% render "components/molecules/hero-heading" %}
+    </div>
+
+    <div class="invite-header__date">
+        <h2 class="invite-header__date-prefix heading-4">are married</h2>
+        {% include "components/molecules/wedding-date" %}
+    </div>
+
+    <div class="invite-header__rsvp">
+       
+            <p class="heading-4 invite-header__title">Thank you for being part of our wedding day!</p>
+
+            <h2 class="heading-4 invite-header__title">Photo gallery password &ndash; 05/06/23</h2>
+
+            <div class="invite-header__cta">
+                {% render "components/atoms/call-to-action-primary"
+                    url: "https://clients.mtstudio.co.uk/gallery/Sophie&Graham/"
+                    text: "View photo gallery"
+                %}
+            </div>
+
+            <div class="invite-header__rsvp">
+                <iframe style="width: 100%; aspect-ratio: 16 / 9;" src="https://player.vimeo.com/video/836343240?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="invite-header__cta">
+                {% render "components/atoms/call-to-action-primary"
+                    url: "https://vimeo.com/836343240"
+                    text: "View highlights video on Vimeo"
+                %}
+            </div>
+            
+            <div class="invite-header__teaser">
+                {% render "components/atoms/image-hex", 
+                    url: "./src/assets/images/sophie-graham-wedding-1.jpg",
+                    alt: "Graham & Sophie wedding photo at Stratton Court Barn",
+                    sizes: sizes,
+                    widths: widths 
+                %}
+            </div>
+    </div>
+
+</div>
+  
+{% endblock %}
