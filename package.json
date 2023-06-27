@@ -27,7 +27,7 @@
     "@11ty/eleventy": "^2.0.1",
     "@parcel/optimizer-data-url": "^2.9.2",
     "@parcel/packager-raw-url": "^2.9.3",
-    "@parcel/transformer-inline-string": "^2.9.2",
+    "@parcel/transformer-inline-string": "^2.9.3",
     "@parcel/transformer-sass": "^2.9.2",
     "@parcel/transformer-webmanifest": "^2.9.3",
     "airtable": "^0.12.1",
