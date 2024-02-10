@@ -1,6 +1,6 @@
 <input
     class="text-input {{ class }}"
-    type="{% if type %}{{ type }}{% elsif %}text{% endif %}"
+    type="{{ type | default: 'text' }}"
     id="{{ id }}"
     name="{{ name }}"
     placeholder="{{ placeholder }}"
