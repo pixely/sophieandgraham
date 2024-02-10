@@ -43,5 +43,8 @@
     "node-fetch": "^3.3.2",
     "normalize.css": "^8.0.1",
     "uuid": "^9.0.1"
+  },
+  "optionalDependencies": {
+    "@parcel/watcher-linux-x64-glibc": "^2.4.0"
   }
 }
