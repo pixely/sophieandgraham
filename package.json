@@ -37,7 +37,7 @@
     "sass": "^1.70.0"
   },
   "dependencies": {
-    "@11ty/eleventy-img": "^4.0.1",
+    "@11ty/eleventy-img": "^3.1.8",
     "@sardine/eleventy-plugin-tinyhtml": "^0.2.0",
     "luxon": "^3.4.4",
     "node-fetch": "^3.3.2",
